@@ -100,11 +100,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataSources\Projects.cs" />
     <Compile Include="DataSources\ProjectsDBSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProjectsDBSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSources\Tasks.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

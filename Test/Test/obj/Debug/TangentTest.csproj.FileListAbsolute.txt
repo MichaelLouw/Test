@@ -46,3 +46,5 @@ C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\Ta
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\TangentTest.csproj.GenerateResource.Cache
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\TangentTest.exe
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\TangentTest.pdb
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\AddProjectTask.g.cs
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\AddProjectTask.baml

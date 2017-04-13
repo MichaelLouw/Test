@@ -14,11 +14,11 @@
         <Label Content="Title" HorizontalAlignment="Left" Margin="88,52,0,0" VerticalAlignment="Top"/>
         <Label Content="Due Datel" HorizontalAlignment="Left" Margin="88,102,0,0" VerticalAlignment="Top"/>
         <Label Content="Estimated Hours" HorizontalAlignment="Left" Margin="88,149,0,0" VerticalAlignment="Top"/>
-        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="289,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="289,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DatePicker HorizontalAlignment="Left" Margin="289,102,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="120"/>
+        <TextBox x:Name="Estimated_Hours" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="289,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Title" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="289,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="Due_date" HorizontalAlignment="Left" Margin="289,102,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="120"/>
         <Button Content="Save Task" HorizontalAlignment="Left" Margin="256,207,0,0" VerticalAlignment="Top" Width="97" Grid.ColumnSpan="2" Height="33" Click="Button_Click"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="31,207,0,0" VerticalAlignment="Top" Width="97" Height="33" Grid.Column="1"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="31,207,0,0" VerticalAlignment="Top" Width="97" Height="33" Grid.Column="1" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

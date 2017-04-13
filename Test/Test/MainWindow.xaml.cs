@@ -33,12 +33,13 @@ namespace TangentTest
     public partial class MainWindow : Window
     {
         public static DataSources.ProjectsDBSet NewProjectsDBSet = new DataSources.ProjectsDBSet();
+        private static List<Projects> rows = new List<Projects>();
         public MainWindow()
         {
             InitializeComponent();
             this.Hide();
             Login FirstLogin = new Login();
-            FirstLogin.Show();
+            FirstLogin.Show();            
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)
@@ -54,112 +55,24 @@ namespace TangentTest
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             populateTable();
+            populateTasks();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             populateTable();
+            populateTasks();
             TangentTest.DataSources.ProjectsDBSet projectsDBSet = ((TangentTest.DataSources.ProjectsDBSet)(this.FindResource("projectsDBSet")));
         }
 
         public void populateTable()
         {
-            //get data from web request
-            try
-            {
-                //create webrequest to api.
-                var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString();
-                var request = (HttpWebRequest)WebRequest.Create(apiURL);
+            projectDataGrid.ItemsSource = Projects.SetProjects();
+        }
 
-                request.Method = "GET";
-                request.ContentType = "application/json";
-                request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
-
-                var response = (HttpWebResponse)request.GetResponse();
-                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-                var jsonString = JsonConvert.DeserializeObject<JArray>(responseString);
-
-                //init dataset
-                NewProjectsDBSet.Clear();
-                NewProjectsDBSet.BeginInit();
-
-
-                //populate the dataset.
-                int length = jsonString.Count;
-                for (int x = 0; x < length; x++)
-                {
-                    //try parse the data.
-                    int pk;
-                    pk = 0;
-                    int.TryParse(jsonString[x]["pk"].ToString(), out pk);
-
-                    DateTime start_date;
-                    start_date = DateTime.MinValue;
-                    DateTime.TryParse(jsonString[x]["start_date"].ToString(), out start_date);
-
-                    string end_dateNUll;
-                    DateTime end_date;
-                    end_date = DateTime.MinValue;
-                    DateTime.TryParse(jsonString[x]["end_date"].ToString(), out end_date);
-                    if (end_date == DateTime.MinValue)
-                    {
-                        end_dateNUll = "(None)";
-                    }
-                    else
-                    {
-                        end_dateNUll = end_date.ToString();
-                    }
-
-                    bool is_billable, is_active;
-                    is_active = false;
-                    is_billable = false;
-                    bool.TryParse(jsonString[x]["is_billable"].ToString(), out is_billable);
-                    bool.TryParse(jsonString[x]["is_active"].ToString(), out is_active);
-
-                    //add row to project table.
-                    DataSources.ProjectsDBSet.ProjectDataTable Projects = new DataSources.ProjectsDBSet.ProjectDataTable();
-                    Projects.AddProjectRow(pk, jsonString[x]["title"].ToString(), jsonString[x]["description"].ToString(), start_date, end_dateNUll, is_billable, is_active);
-                    NewProjectsDBSet.Project.Merge(Projects);
-
-                    //add row for each project task in project table.
-                    int TaskLenght = jsonString[x]["task_set"].Count();
-                    for (int y = 0; y < TaskLenght; y++)
-                    {
-                        //try parse the data.
-                        int id, project;
-                        id = 0;
-                        project = 0;
-                        int.TryParse(jsonString[x]["task_set"][y]["id"].ToString(), out id);
-                        int.TryParse(jsonString[x]["task_set"][y]["project"].ToString(), out project);
-
-                        DateTime due_date;
-                        due_date = DateTime.MinValue;
-                        DateTime.TryParse(jsonString[x]["task_set"][y]["due_date"].ToString(), out due_date);
-
-                        //add row to task table.
-                        DataSources.ProjectsDBSet.TasksDataTable ProjectTask = new DataSources.ProjectsDBSet.TasksDataTable();
-                        ProjectTask.AddTasksRow(id, jsonString[x]["task_set"][y]["title"].ToString(), due_date, jsonString[x]["task_set"][y]["estimated_hours"].ToString(), project);
-
-                        NewProjectsDBSet.Tasks.Merge(ProjectTask);
-                    }
-                }
-
-                NewProjectsDBSet.EndInit();
-                var items = new List<DataSources.ProjectsDBSet.ProjectRow>();
-
-                foreach (ProjectsDBSet.ProjectRow dr in NewProjectsDBSet.Project.Rows)
-                {
-                    items.Add(dr);
-                }
-
-                //bind data to datagrid.
-                projectDataGrid.ItemsSource = items;
-            }
-            catch (Exception ex)
-            {
-                Logger.error(ex.Message, 0);
-            }
+        public void populateTasks()
+        {
+            tasksDataGrid.ItemsSource = Tasks.SetTasks();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -168,6 +81,8 @@ namespace TangentTest
             modalWindow.ShowDialog();
         }
 
+
+        //delete project
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             try
@@ -177,25 +92,19 @@ namespace TangentTest
                 if (ConfirmDeletion == MessageBoxResult.Yes)
                 {
                     //execute.
-                    ProjectsDBSet.ProjectRow Deletion = (ProjectsDBSet.ProjectRow)projectDataGrid.SelectedItem;
+                    Projects Deletion = projectDataGrid.SelectedItem as Projects;
+                    var pk = Deletion.PK;
+                    var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
+                    var request = (HttpWebRequest)WebRequest.Create(apiURL);
 
-                    foreach (DataRow tr in Deletion.Table.Rows)
-                    {
-                        var pk = tr["pk"].ToString();
-                        var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
-                        var request = (HttpWebRequest)WebRequest.Create(apiURL);
+                    request.Method = "DELETE";
+                    request.ContentType = "application/json";
+                    request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
 
-                        request.Method = "DELETE";
-                        request.ContentType = "application/json";
-                        request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
+                    var response = (HttpWebResponse)request.GetResponse();
+                    var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-                        var response = (HttpWebResponse)request.GetResponse();
-                        var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-                        populateTable();
-
-                        //validate the response (logfile purposes)
-                    }
+                    populateTable();
                 }
                 else
                 {
@@ -259,6 +168,54 @@ namespace TangentTest
             {
                 Logger.error(ex.Message, 0);
             }            
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Projects addtaskProject = projectDataGrid.SelectedItem as Projects;
+                if (rows.Count == 1)
+                {
+                    Application.Current.Properties["Project_PK"] = rows[0].PK.ToString();
+                    AddProjectTask NewAdd = new AddProjectTask();
+                    NewAdd.ShowDialog();
+                }
+                else
+                {
+                    //no project selected.
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.error(ex.Message, 10);
+            }            
+        }
+
+        private void Select_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Projects prjRow = projectDataGrid.SelectedItem as Projects;
+                rows.Add(prjRow);
+            }
+            catch(Exception ex)
+            {
+                Logger.error(ex.Message, 25);
+            }            
+        }
+
+        private void Select_Unchecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Projects prjRow = projectDataGrid.SelectedItem as Projects;
+                rows.Remove(prjRow);
+            }
+            catch(Exception ex)
+            {
+                Logger.error(ex.Message, 26);
+            }
         }
     }
 }
