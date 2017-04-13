@@ -22,6 +22,9 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Windows.Threading;
 using System.Runtime.Remoting.Messaging;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 
 namespace TangentTest
 {
@@ -92,17 +95,21 @@ namespace TangentTest
                 if (ConfirmDeletion == MessageBoxResult.Yes)
                 {
                     //execute.
-                    Projects Deletion = projectDataGrid.SelectedItem as Projects;
-                    var pk = Deletion.PK;
-                    var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
-                    var request = (HttpWebRequest)WebRequest.Create(apiURL);
+                    //Projects Deletion = projectDataGrid.SelectedItems as Projects;
+                    
+                    for (int x = 0; x < rows.Count; x++)
+                    {
+                        var pk = rows[x].PK;
+                        var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
+                        var request = (HttpWebRequest)WebRequest.Create(apiURL);
 
-                    request.Method = "DELETE";
-                    request.ContentType = "application/json";
-                    request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
+                        request.Method = "DELETE";
+                        request.ContentType = "application/json";
+                        request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
 
-                    var response = (HttpWebResponse)request.GetResponse();
-                    var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                        var response = (HttpWebResponse)request.GetResponse();
+                        var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                    }                    
 
                     populateTable();
                 }
@@ -121,53 +128,90 @@ namespace TangentTest
         {
             try
             {
-                List<ProjectsDBSet.ProjectRow> Updated = projectDataGrid.Items.Cast<ProjectsDBSet.ProjectRow>().ToList();
+                Projects updatetaskProject = projectDataGrid.SelectedItem as Projects;
 
-                foreach (ProjectsDBSet.ProjectRow dr in Updated)
+                //foreach (ProjectsDBSet.ProjectRow dr in Updated)
+                //{
+                //if (dr["Title"].ToString() != NewProjectsDBSet.Project.Rows[0]["Title"].ToString() || dr["Description"].ToString() != NewProjectsDBSet.Project.Rows[0]["Description"].ToString() || dr["Start_Date"].ToString() != NewProjectsDBSet.Project.Rows[0]["Start_Date"].ToString() || dr["End_Date"].ToString() != NewProjectsDBSet.Project.Rows[0]["End_Date"].ToString() || dr["Is_Billable"].ToString() != NewProjectsDBSet.Project.Rows[0]["Is_Billable"].ToString() || dr["Is_Active"].ToString() != NewProjectsDBSet.Project.Rows[0]["Is_Active"].ToString())
+                //{
+                //    //update at api.
+                //    var pk = dr["pk"].ToString();
+                //    var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
+                //    var request = (HttpWebRequest)WebRequest.Create(apiURL);
+
+                //    var postData = "title=" + dr["Title"].ToString();
+                //    postData += "&description=" + dr["Description"].ToString();
+                //    postData += "&start_date=" + dr["Start_Date"].ToString().Replace(@"/", "-");
+                //    postData += "&end_date=" + dr["End_Date"].ToString().Replace(@"/", "-");
+                //    postData += "&is_billable=" + dr["Is_Billable"].ToString();
+                //    postData += "&is_active=" + dr["Is_Active"].ToString();
+
+                using (var client = new HttpClient())
                 {
-                    if (dr["Title"].ToString() != NewProjectsDBSet.Project.Rows[0]["Title"].ToString() || dr["Description"].ToString() != NewProjectsDBSet.Project.Rows[0]["Description"].ToString() || dr["Start_Date"].ToString() != NewProjectsDBSet.Project.Rows[0]["Start_Date"].ToString() || dr["End_Date"].ToString() != NewProjectsDBSet.Project.Rows[0]["End_Date"].ToString() || dr["Is_Billable"].ToString() != NewProjectsDBSet.Project.Rows[0]["Is_Billable"].ToString() || dr["Is_Active"].ToString() != NewProjectsDBSet.Project.Rows[0]["Is_Active"].ToString())
+                    try
                     {
-                        //update at api.
-                        var pk = dr["pk"].ToString();
-                        var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
-                        var request = (HttpWebRequest)WebRequest.Create(apiURL);
+                        var pk = updatetaskProject.PK;
 
-                        var postData = "title=" + dr["Title"].ToString();
-                        postData += "&description=" + dr["Description"].ToString();
-                        postData += "&start_date=" + dr["Start_Date"].ToString().Replace(@"/", "-");
-                        postData += "&end_date=" + dr["End_Date"].ToString().Replace(@"/", "-");
-                        postData += "&is_billable=" + dr["Is_Billable"].ToString();
-                        postData += "&is_active=" + dr["Is_Active"].ToString();
-
-                        var data = Encoding.ASCII.GetBytes(postData);
-
-                        request.Method = "PATCH";
-                        request.ContentType = "application/json";
-                        request.ContentLength = data.Length;
-                        request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
-
-                        using (var stream = request.GetRequestStream())
+                        Projects postData = new Projects { Title = updatetaskProject.Title, Description = updatetaskProject.Description , End_Date = updatetaskProject.End_Date.ToString().Replace(@"/", "-"), Is_Active = updatetaskProject.Is_Active, Is_Billable = updatetaskProject.Is_Billable, PK = updatetaskProject.PK, Start_Date = updatetaskProject.Start_Date.ToString().Replace(@"/", "-") };
+                        client.BaseAddress = new Uri(ConfigurationManager.AppSettings["Projects_Service"].ToString());
+                        var response = client.PutAsJsonAsync(pk + "/", postData).Result;
+                        if (response.IsSuccessStatusCode)
                         {
-                            stream.Write(data, 0, data.Length);
+                            populateTable();
+                        }
+                        else
+                        {
+                            populateTasks();
                         }
 
-                        var response = (HttpWebResponse)request.GetResponse();
-                        var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
                         populateTable();
-                        //handle response from api.
-
                     }
-                    else
+                    catch(Exception ex)
                     {
-                        //do nothing 
-                    }
+                        Logger.error(ex.Message, 7);
+                    }                    
                 }
+
+                //var pk = updatetaskProject.PK;
+                //var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
+                //var request = (HttpWebRequest)WebRequest.Create(apiURL);
+
+                //var postData = "title=" + updatetaskProject.Title;
+                //postData += "&description=" + updatetaskProject.Description;
+                //postData += "&start_date=" + updatetaskProject.Start_Date.ToString().Replace(@"/", "-");
+                //postData += "&end_date=" + updatetaskProject.End_Date.ToString().Replace(@"/", "-");
+                //postData += "&is_billable=" + updatetaskProject.Is_Billable;
+                //postData += "&is_active=" + updatetaskProject.Is_Active;
+
+                //var data = Encoding.ASCII.GetBytes(postData);
+
+                //request.Method = "PUT";
+                //request.ContentType = "application/x-www-form-urlencoded";
+                //request.ContentLength = data.Length;
+                //request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
+
+                //using (var stream = request.GetRequestStream())
+                //{
+                //    stream.Write(data, 0, data.Length);
+                //}
+
+                //var response = (HttpWebResponse)request.GetResponse();
+                //var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                
+                //handle response from api.
+
+                //}
+                //else
+                //{
+                //    //do nothing 
+                //}
+                //}
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.error(ex.Message, 0);
-            }            
+            }
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)

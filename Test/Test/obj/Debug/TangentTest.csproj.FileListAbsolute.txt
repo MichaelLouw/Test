@@ -48,3 +48,10 @@ C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\Ta
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\TangentTest.pdb
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\AddProjectTask.g.cs
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\AddProjectTask.baml
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.dll
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.WebRequest.dll
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.xml
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.WebRequest.xml

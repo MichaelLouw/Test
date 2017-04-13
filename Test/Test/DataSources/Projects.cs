@@ -19,8 +19,8 @@ namespace TangentTest.DataSources
         public int PK { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime Start_Date { get; set; }
-        public DateTime End_Date { get; set; }
+        public string Start_Date { get; set; }
+        public string End_Date { get; set; }
         public bool Is_Billable { get; set; }
         public bool Is_Active { get; set; }
 
@@ -75,7 +75,7 @@ namespace TangentTest.DataSources
                     bool.TryParse(jsonString[x]["is_billable"].ToString(), out is_billable);
                     bool.TryParse(jsonString[x]["is_active"].ToString(), out is_active);
 
-                    Project.Add(new Projects() { PK = pk, Title = jsonString[x]["title"].ToString(), Description = jsonString[x]["description"].ToString(), Start_Date = start_date, End_Date = end_date, Is_Active = is_active, Is_Billable = is_billable });
+                    Project.Add(new Projects() { PK = pk, Title = jsonString[x]["title"].ToString(), Description = jsonString[x]["description"].ToString(), Start_Date = start_date.ToString(), End_Date = end_date.ToString(), Is_Active = is_active, Is_Billable = is_billable });
                 }
             }
             catch(Exception ex)
