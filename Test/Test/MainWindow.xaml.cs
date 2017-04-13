@@ -170,35 +170,42 @@ namespace TangentTest
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult ConfirmDeletion = System.Windows.MessageBox.Show("Please Confirm", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
-
-            if (ConfirmDeletion == MessageBoxResult.Yes)
+            try
             {
-                //execute.
-                ProjectsDBSet.ProjectRow Deletion = (ProjectsDBSet.ProjectRow)projectDataGrid.SelectedItem;
+                MessageBoxResult ConfirmDeletion = System.Windows.MessageBox.Show("Please Confirm", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
 
-                foreach (DataRow tr in Deletion.Table.Rows)
+                if (ConfirmDeletion == MessageBoxResult.Yes)
                 {
-                    var pk = tr["pk"].ToString();
-                    var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
-                    var request = (HttpWebRequest)WebRequest.Create(apiURL);
+                    //execute.
+                    ProjectsDBSet.ProjectRow Deletion = (ProjectsDBSet.ProjectRow)projectDataGrid.SelectedItem;
 
-                    request.Method = "DELETE";
-                    request.ContentType = "application/json";
-                    request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
+                    foreach (DataRow tr in Deletion.Table.Rows)
+                    {
+                        var pk = tr["pk"].ToString();
+                        var apiURL = ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/";
+                        var request = (HttpWebRequest)WebRequest.Create(apiURL);
 
-                    var response = (HttpWebResponse)request.GetResponse();
-                    var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                        request.Method = "DELETE";
+                        request.ContentType = "application/json";
+                        request.Headers[HttpRequestHeader.Authorization] = "Token " + Application.Current.Properties["Token"].ToString();
 
-                    populateTable();
+                        var response = (HttpWebResponse)request.GetResponse();
+                        var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
-                    //validate the response (logfile purposes)
+                        populateTable();
+
+                        //validate the response (logfile purposes)
+                    }
+                }
+                else
+                {
+                    //no changes
                 }
             }
-            else
+            catch(Exception ex)
             {
-                //no changes
-            }
+                Logger.error(ex.Message, 10);
+            }            
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -252,40 +259,6 @@ namespace TangentTest
             {
                 Logger.error(ex.Message, 0);
             }            
-        }
-
-        private void projectDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            try
-            {
-                if (e.EditAction == DataGridEditAction.Commit)
-
-                {
-
-                    this.Dispatcher.BeginInvoke(new DispatcherOperationCallback((param) =>
-
-                    {
-
-                        // get the new cell, set focus, then open for edit
-
-                        //var cell = Helper.GetCell(projectDataGrid, rowIndex, colIndex);
-
-                        //cell.Focus();
-
-
-
-                        projectDataGrid.BeginEdit();
-
-                        return null;
-
-                    }), DispatcherPriority.Background, new object[] { null });
-
-                }
-            }
-            catch(Exception ex)
-            {
-                Logger.error(ex.Message, 0);
-            }
         }
     }
 }

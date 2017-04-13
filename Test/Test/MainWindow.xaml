@@ -21,7 +21,7 @@
             <RowDefinition Height="328*"/>
         </Grid.RowDefinitions>
         <Button Content="Refresh Data" HorizontalAlignment="Left" Margin="-517,32,0,204" VerticalAlignment="Center" Width="126" Height="36" Click="Button_Click"/>
-        <DataGrid x:Name="projectDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="-517,92,-512,10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.RowSpan="3" HorizontalContentAlignment="Center" HeadersVisibility="Column" MaxWidth="1024" MaxHeight="250" MinHeight="250" MinWidth="1024" RowEditEnding="projectDataGrid_RowEditEnding">
+        <DataGrid x:Name="projectDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="-517,92,-512,10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.RowSpan="3" HorizontalContentAlignment="Center" HeadersVisibility="Column" MaxWidth="1024" MaxHeight="250" MinHeight="250" MinWidth="1024">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn/>
                 <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="SizeToHeader"/>
