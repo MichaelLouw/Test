@@ -42,7 +42,7 @@ namespace TangentTest
                 var apiURL = ConfigurationManager.AppSettings["Task_Service"].ToString();
                 var request = (HttpWebRequest)WebRequest.Create(apiURL);
 
-                var postData = "title=" + Title;
+                var postData = "title=" + title;
                 postData += "&estimated_hours=" + estimatedHours;
                 postData += "&due_date=" + duedate.Replace(@"/", "-");
                 postData += "&project=" + Application.Current.Properties["Project_PK"].ToString();
