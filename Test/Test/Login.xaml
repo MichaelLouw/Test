@@ -14,7 +14,7 @@
         <Label Margin="57,40,58,193" Grid.Row="1" HorizontalAlignment="Center" Width="177" HorizontalContentAlignment="Center" Name="lblusername" Foreground="Black" >User Name</Label>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="57,72,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Name="txtUserName"></TextBox>
         <Label Margin="57,95,58,139" Grid.Row="1" HorizontalAlignment="Center"  Content="Password" Width="177" HorizontalContentAlignment="Center" Name="lblpassword"  />
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="57,126,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177" Name="txtPassword"/>
+        <PasswordBox HorizontalAlignment="Left" Height="23" Margin="57,126,0,0" Grid.Row="1" VerticalAlignment="Top" Width="177" Name="txtPassword"/>
         <Button Content="Login" HorizontalAlignment="Center" Margin="96,165,95,0" Grid.Row="1" VerticalAlignment="Top" Width="101" RenderTransformOrigin="-0.092,0.719" Height="28" Click="Button_Click"/>
     </Grid>
 </Window>

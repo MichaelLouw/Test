@@ -32,7 +32,7 @@ namespace TangentTest
         {
             try
             {
-                var password = txtPassword.Text;
+                var password = txtPassword.Password;
                 var username = txtUserName.Text;
 
                 //create webrequest to api.

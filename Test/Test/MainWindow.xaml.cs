@@ -150,23 +150,31 @@ namespace TangentTest
 
                 Projects postData = new Projects { Title = updatetaskProject.Title, Description = updatetaskProject.Description, End_Date = updatetaskProject.End_Date.ToString().Replace(@"/", "-").Substring(0, 10), Is_Active = updatetaskProject.Is_Active, Is_Billable = updatetaskProject.Is_Billable, PK = updatetaskProject.PK, Start_Date = updatetaskProject.Start_Date.ToString().Replace(@"/", "-").Substring(0, 10) };
 
-                string desc, start, end;
-                bool isbil, isac;
-                desc = updatetaskProject.Description;
-                start = updatetaskProject.Start_Date.ToString().Replace(@"/", "-").Substring(0, 10);
-                end = updatetaskProject.End_Date.ToString().Replace(@"/", "-").Substring(0, 10);
-                isbil = Convert.ToBoolean(updatetaskProject.Is_Billable.ToString());
-                isac = Convert.ToBoolean(updatetaskProject.Is_Active.ToString());
+                //string desc, start, end;
+                //bool isbil, isac;
+                //desc = updatetaskProject.Description;
+                //start = updatetaskProject.Start_Date.ToString().Replace(@"/", "-").Substring(0, 10);
+                //end = updatetaskProject.End_Date.ToString().Replace(@"/", "-").Substring(0, 10);
+                //isbil = Convert.ToBoolean(updatetaskProject.Is_Billable.ToString());
+                //isac = Convert.ToBoolean(updatetaskProject.Is_Active.ToString());
 
-                var postOBJ = "title=" + postData.Title;
-                postOBJ += "&description=" + desc;
-                postOBJ += "&start_date=" + start;
-                postOBJ += "&end_date=" + end;
-                postOBJ += "&is_Billable" + isbil;
-                postOBJ += "&is_Active" + isac;
+                //var postOBJ = "title=" + postData.Title;
+                //postOBJ += "&description=" + desc;
+                //postOBJ += "&start_date=" + start;
+                //postOBJ += "&end_date=" + end;
+                //postOBJ += "&is_Billable" + isbil;
+                //postOBJ += "&is_Active" + isac;
+                Dictionary<string, string> Patch = new Dictionary<string, string>();
+                Patch.Add("title", postData.Title);
+                Patch.Add("description", postData.Description);
+                Patch.Add("start_date", postData.Start_Date);
+                Patch.Add("end_date", postData.End_Date);
+                Patch.Add("is_Billable", postData.Is_Billable.ToString());
+                Patch.Add("is_Active", postData.Is_Active.ToString());
+
                 var pk = updatetaskProject.PK;
                 var client = new HttpClient();
-                var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/", postOBJ);
+                var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/", Patch);
 
                 var content = response.Content;
                 var obj = await content.ReadAsByteArrayAsync();
@@ -287,10 +295,19 @@ namespace TangentTest
             {
                 Tasks updatetaskProject = tasksDataGrid.SelectedItem as Tasks;
 
-                Tasks postData = new Tasks { Due_Date = updatetaskProject.Due_Date, Estimated_Hours = updatetaskProject.Estimated_Hours, ID = updatetaskProject.ID, Project = updatetaskProject.Project, Title = updatetaskProject.Project.ToString() };
+                Tasks postData = new Tasks { Due_Date = updatetaskProject.Due_Date, Estimated_Hours = updatetaskProject.Estimated_Hours, ID = updatetaskProject.ID, Project = updatetaskProject.Project, Title = updatetaskProject.Title.ToString() };
+
+                Dictionary<string, string> PatchTask = new Dictionary<string, string>();
+                PatchTask.Add("due_date", postData.Due_Date.ToString().Replace(@"/", "-").Substring(0, 10));
+                PatchTask.Add("estimated_hours", postData.Estimated_Hours.ToString());
+                PatchTask.Add("id", postData.ID.ToString());
+                PatchTask.Add("title", postData.Title.ToString());
+                PatchTask.Add("project", postData.Project.ToString());
+
+
                 var pk = updatetaskProject.ID;
                 var client = new HttpClient();
-                var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Task_Service"].ToString() + pk + "/", postData);
+                var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Task_Service"].ToString() + pk + "/", PatchTask);
 
                 var content = response.Content;
                 var obj = await content.ReadAsByteArrayAsync();
@@ -355,10 +372,9 @@ namespace TangentTest
                 var content = new ObjectContent<T>(value, new JsonMediaTypeFormatter());
                 var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUri) { Content = content };
                 //add authorization header.
+                //request.Content = new ObjectContent<T>(value, new JsonMediaTypeFormatter());
+                request.Content.Headers.Add("Contant-Type", "application/x-www-form-urlencoded");
                 request.Headers.Add("Authorization", Application.Current.Properties["Token"].ToString());
-                request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-                content.Headers.Clear();
-                content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
                 return client.SendAsync(request);
             }
