@@ -48,6 +48,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TangentTest.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ImranB.SystemNetHttp.HttpClientExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ImranB.SystemNetHttp.HttpClientExtensions.1.0.0\lib\ImranB.SystemNetHttp.HttpClientExtensions.dll</HintPath>

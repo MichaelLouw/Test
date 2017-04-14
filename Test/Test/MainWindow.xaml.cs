@@ -27,6 +27,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using Microsoft.AspNet.Http.Extensions;
 using ImranB.SystemNetHttp;
+using System.Globalization;
 
 namespace TangentTest
 {
@@ -40,12 +41,21 @@ namespace TangentTest
         public static DataSources.ProjectsDBSet NewProjectsDBSet = new DataSources.ProjectsDBSet();
         private static List<Projects> rows = new List<Projects>();
         private static List<Tasks> TaskRows = new List<Tasks>();
+
+
         public MainWindow()
         {
-            InitializeComponent();
-            this.Hide();
-            Login FirstLogin = new Login();
-            FirstLogin.Show();            
+            InitializeComponent();     
+            if (Application.Current.Properties["Token"] == null)
+            {
+                this.Close();
+                Login BackToLogin = new Login();
+                BackToLogin.Show();
+            }
+            else
+            {
+
+            }
         }
 
         private void ListBox_Loaded(object sender, RoutedEventArgs e)
@@ -138,11 +148,30 @@ namespace TangentTest
             {
                 Projects updatetaskProject = projectDataGrid.SelectedItem as Projects;
 
-                Projects postData = new Projects { Title = updatetaskProject.Title, Description = updatetaskProject.Description, End_Date = updatetaskProject.End_Date.ToString().Replace(@"/", "-"), Is_Active = updatetaskProject.Is_Active, Is_Billable = updatetaskProject.Is_Billable, PK = updatetaskProject.PK, Start_Date = updatetaskProject.Start_Date.ToString().Replace(@"/", "-") };
+                Projects postData = new Projects { Title = updatetaskProject.Title, Description = updatetaskProject.Description, End_Date = updatetaskProject.End_Date.ToString().Replace(@"/", "-").Substring(0, 10), Is_Active = updatetaskProject.Is_Active, Is_Billable = updatetaskProject.Is_Billable, PK = updatetaskProject.PK, Start_Date = updatetaskProject.Start_Date.ToString().Replace(@"/", "-").Substring(0, 10) };
+
+                string desc, start, end;
+                bool isbil, isac;
+                desc = updatetaskProject.Description;
+                start = updatetaskProject.Start_Date.ToString().Replace(@"/", "-").Substring(0, 10);
+                end = updatetaskProject.End_Date.ToString().Replace(@"/", "-").Substring(0, 10);
+                isbil = Convert.ToBoolean(updatetaskProject.Is_Billable.ToString());
+                isac = Convert.ToBoolean(updatetaskProject.Is_Active.ToString());
+
+                var postOBJ = "title=" + postData.Title;
+                postOBJ += "&description=" + desc;
+                postOBJ += "&start_date=" + start;
+                postOBJ += "&end_date=" + end;
+                postOBJ += "&is_Billable" + isbil;
+                postOBJ += "&is_Active" + isac;
                 var pk = updatetaskProject.PK;
                 var client = new HttpClient();
-                var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/", postData);
+                var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Projects_Service"].ToString() + pk + "/", postOBJ);
 
+                var content = response.Content;
+                var obj = await content.ReadAsByteArrayAsync();
+                var str = System.Text.Encoding.Default.GetString(obj);
+           
                 if (response.IsSuccessStatusCode)
                 {
                     Logger.info(response.ToString(), 1);
@@ -263,6 +292,10 @@ namespace TangentTest
                 var client = new HttpClient();
                 var response = await HTTPMethods.PatchAsJsonAsync(client, ConfigurationManager.AppSettings["Task_Service"].ToString() + pk + "/", postData);
 
+                var content = response.Content;
+                var obj = await content.ReadAsByteArrayAsync();
+                var str = System.Text.Encoding.Default.GetString(obj);
+
                 if (response.IsSuccessStatusCode)
                 {
                     Logger.info(response.ToString(), 1);
@@ -317,12 +350,23 @@ namespace TangentTest
     {
         public static Task<HttpResponseMessage> PatchAsJsonAsync<T>(this HttpClient client, string requestUri, T value)
         {
-            var content = new ObjectContent<T>(value, new JsonMediaTypeFormatter());
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUri) { Content = content };
-            //add authorization header.
-            request.Headers.Add("Authorization", Application.Current.Properties["Token"].ToString());
+            try
+            {
+                var content = new ObjectContent<T>(value, new JsonMediaTypeFormatter());
+                var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUri) { Content = content };
+                //add authorization header.
+                request.Headers.Add("Authorization", Application.Current.Properties["Token"].ToString());
+                request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                content.Headers.Clear();
+                content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
-            return client.SendAsync(request);
+                return client.SendAsync(request);
+            }
+            catch(Exception ex)
+            {
+                Logger.error(ex.Message, 10);
+            }
+            return null;
         }
     }
 }

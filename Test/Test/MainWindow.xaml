@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TangentTest"
         xmlns:DataSources="clr-namespace:TangentTest.DataSources" x:Class="TangentTest.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="881.813" Width="1123.904" Loaded="Window_Loaded">
+        Title="MainWindow" Height="668.813" Width="1123.904" Loaded="Window_Loaded">
     <Window.Resources>
         <DataSources:ProjectsDBSet x:Key="projectsDBSet"/>
         <CollectionViewSource x:Key="projectViewSource" Source="{Binding Project, Source={StaticResource projectsDBSet}}"/>
@@ -14,14 +14,15 @@
     </Window.Resources>
     <Grid HorizontalAlignment="Center" DataContext="{StaticResource projectViewSource}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="272*"/>
-            <RowDefinition Height="0*"/>
-            <RowDefinition Height="104*"/>
-            <RowDefinition Height="147*"/>
-            <RowDefinition Height="328*"/>
+            <RowDefinition Height="203*"/>
+            <RowDefinition Height="97*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="109*"/>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="112*"/>
         </Grid.RowDefinitions>
-        <Button Content="Refresh Data" HorizontalAlignment="Left" Margin="-517,32,0,204" VerticalAlignment="Center" Width="126" Height="36" Click="Button_Click"/>
-        <DataGrid x:Name="projectDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="-517,92,-512,10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.RowSpan="3" HorizontalContentAlignment="Center" HeadersVisibility="Column" MaxWidth="1024" MaxHeight="250" MinHeight="250" MinWidth="1024" AutomationProperties.IsColumnHeader="True" SelectionMode="Single">
+        <DataGrid x:Name="projectDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="-542,50,-487,0" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.RowSpan="2" HorizontalContentAlignment="Center" HeadersVisibility="Column" MaxWidth="1024" MaxHeight="250" MinHeight="250" MinWidth="1024" AutomationProperties.IsColumnHeader="True" SelectionMode="Single" Width="1029">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="0.10*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -44,7 +45,7 @@
                 <DataGridCheckBoxColumn x:Name="is_ActiveColumn" Binding="{Binding Is_Active}" Header="Is Active" Width="0.15*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="tasksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="-517,52,-512,158" Grid.Row="3" Grid.RowSpan="2" RowDetailsVisibilityMode="VisibleWhenSelected" MaxWidth="1024" MaxHeight="250" MinWidth="1019" MinHeight="250" AutomationProperties.IsColumnHeader="True" SelectionMode="Single">
+        <DataGrid x:Name="tasksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="-542,32,-487,15" Grid.Row="3" Grid.RowSpan="4" RowDetailsVisibilityMode="VisibleWhenSelected" MaxWidth="1024" MaxHeight="250" MinWidth="1019" MinHeight="250" AutomationProperties.IsColumnHeader="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="0.10*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -64,12 +65,13 @@
                 <DataGridTextColumn x:Name="estimated_HoursColumn" Binding="{Binding Estimated_Hours}" Header="Estimated Hours" Width="0.30*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add Project" HorizontalAlignment="Left" Margin="-361,32,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click_1"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="-209,32,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click_2"/>
-        <Button Content="Update Changes" HorizontalAlignment="Left" Margin="-55,32,-71,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click_3"/>
-        <Label Content="Select Project first!" HorizontalAlignment="Left" Margin="-517,11,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.462" Width="126" Height="36"/>
-        <Button Content="Add Task" HorizontalAlignment="Left" Margin="-361,6,0,0" VerticalAlignment="Top" Width="126" Height="36" Grid.Row="3" Click="Button_Click_4"/>
-        <Button Content="Delete Task" HorizontalAlignment="Left" Margin="-209,6,0,0" VerticalAlignment="Top" Width="126" Height="36" Grid.Row="3" Click="Button_Click_5"/>
-        <Button Content="Update Task" HorizontalAlignment="Left" Margin="-55,6,-71,0" VerticalAlignment="Top" Width="126" Height="36" Grid.Row="3" Click="Button_Click_6"/>
+        <Button Content="Refresh Data" HorizontalAlignment="Left" Margin="-542,9,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click"/>
+        <Button Content="Add Project" HorizontalAlignment="Left" Margin="-411,9,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click_1"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="-280,9,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click_2"/>
+        <Button Content="Update Changes" HorizontalAlignment="Left" Margin="-149,9,0,0" VerticalAlignment="Top" Width="126" Height="36" Click="Button_Click_3"/>
+        <Label Content="Select Project first!" HorizontalAlignment="Left" Margin="-542,1,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.252,0.462" Width="126" Height="36"/>
+        <Button Content="Add Task" HorizontalAlignment="Left" Margin="-411,1,0,0" VerticalAlignment="Top" Width="126" Height="36" Grid.Row="3" Click="Button_Click_4"/>
+        <Button Content="Delete Task" HorizontalAlignment="Left" Margin="-280,1,0,0" VerticalAlignment="Top" Width="126" Height="36" Grid.Row="3" Click="Button_Click_5"/>
+        <Button Content="Update Task" HorizontalAlignment="Left" Margin="-149,1,0,0" VerticalAlignment="Top" Width="126" Height="36" Grid.Row="3" Click="Button_Click_6"/>
     </Grid>
 </Window>

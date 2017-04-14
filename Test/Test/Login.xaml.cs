@@ -65,12 +65,12 @@ namespace TangentTest
 
                     //if success open main.
                     try
-                    {                        
+                    {
                         MainWindow OpenMain = new MainWindow();
                         OpenMain.Show();
                         this.Close();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         throw ex;
                     }
@@ -81,12 +81,19 @@ namespace TangentTest
 
                     //give failed login to user.
 
-                }                
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                //wron password color.
+                SolidColorBrush MyColor = new SolidColorBrush();
+                MyColor.Color = Colors.Red;
+                
+                lblpassword.Foreground = MyColor;
+                lblusername.Foreground = MyColor;
+
                 Logger.error(ex.Message, 1);
-            }            
+            }
         }
     }
 }
