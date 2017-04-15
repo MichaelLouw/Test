@@ -70,3 +70,7 @@ C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\Mi
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\Microsoft.Extensions.WebEncoders.Core.xml
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\Microsoft.Net.Http.Headers.xml
 C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\TangentTest.exe.manifest
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\bin\Debug\TangentTest.application
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\TangentTest.exe.manifest
+C:\Users\micha\Documents\Visual Studio Projects\Test\Test\Test\Test\obj\Debug\TangentTest.application

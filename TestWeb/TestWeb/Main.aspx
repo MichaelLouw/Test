@@ -1,10 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Main.aspx.cs" Inherits="TestWeb.Main" MasterPageFile="~/Site.Master" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:HiddenField runat="server" ID="ProjectsURL" />
+    <asp:HiddenField runat="server" ID="TasksURL" />
     <div class="row">
         <asp:Label runat="server" Text="Projects"></asp:Label>
         <div class="col-lg-12">
@@ -37,6 +36,8 @@
         $(document).ready(function () {
             if (sessionStorage.getItem("Token") != null) {
                 //token found
+                LoadProjects();
+                LoadTasks();
             }
             else {
                 //no token login again.
@@ -46,6 +47,7 @@
 
         function LoadProjects() {
             //GET
+            //Can populate table using DevExpress Tools.
             $("#ProjectsTable").dxdatagrid({
                 dataSource: {
                     store: {
@@ -82,15 +84,21 @@
                     //open modal to view project details.
                 }
             })
+
+            //Populate Table using convetional Append soltion to the HTML (Also create HTMl table obove)
+
+
+            //Populate table using ng-repeat (angular.js) with angularcontroller.
         }
 
         function LoadTasks() {
             //GET
+            //Can populate table using DevExpress Tools.
             $("#ProjectsTable").dxdatagrid({
                 dataSource: {
                     store: {
                         type: "odata",
-                        url: $("#<%=ProjectsURL.ClientID%>").val(),
+                        url: $("#<%=TasksURL.ClientID%>").val(),
                         headers: {
                             "Authorization": "Token" + sessionStorage.getItem("Token")
                         }
@@ -119,6 +127,11 @@
                     //open modal to view task details.
                 }
             })
+
+            //Populate Table using convetional Append soltion to the HTML (Also create HTMl table obove)
+
+
+            //Populate table using ng-repeat (angular.js) with angularcontroller.
         }
 
         function RefreshTable() {

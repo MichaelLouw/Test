@@ -36,20 +36,17 @@
               <div class='text-center'>
                 <div class='checkbox'>
                   <label>
-                    <input type='checkbox'>
+                    <input type='checkbox'/>
                     Remember me on this computer
                   </label>
                 </div>
-                <asp:Button runat="server" CssClass="btn btn-default" ID="btnLogin" OnClick="btnLogin_Click" Text="Login"/>
-                <br>
+                <asp:Button runat="server" CssClass="btn btn-default" ID="btnLogin" OnClientClick="Login(); return false;" Text="Login"/>
+                <br />
                 <asp:Label runat="server" Text="" ID="lblError" ForeColor="#ff3300"></asp:Label>
                 <br />
                   <div class="row">
-                      <a href="forgot_password.html" onclick="errormessage(); return false;">Forgot password?</a>
+                      <a href="forgot_password.html" >Forgot password?</a>
                   </div>
-                  <div class="row">
-                      <a href="Register.aspx">Registration</a>
-                  </div>   
               </div>
             </fieldset>
           </form>
@@ -63,20 +60,22 @@
 <script>
 
     function Login() {
+        console.log("Login");
         var name = $("#<%=User.ClientID%>").val();
         var password = $("#<%=Password.ClientID%>").val();
 
-        var Loginurl = $("<%=LoginURL.ClientID%>").val();
-
+        var Loginurl = $("#<%=LoginURL.ClientID%>").val();
+        console.log(Loginurl);
         //do ajax post to api.
         $.ajax({
             contentType: "application/json",
             method: "POST",
             url: Loginurl,
-            data: { "username": name, "password": password },
+            data: JSON.stringify({ "username": name, "password": password }),
             success: function (data) {
                 //set session var.
-                alert(data);
+                //alert(JSON.stringify(data));
+                console.log(data);
                 if (data["token"] != null) {
                     sessionStorage.setItem("Token", data["token"]);
                     window.location.replace("Main.aspx");
@@ -88,8 +87,7 @@
             error: function (data) {
                 $("#<%=lblError.ClientID%>").val("Error login in check internet connection");
             }
-        })
-
+        });
     }
 
 </script>
