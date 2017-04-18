@@ -22,7 +22,7 @@
                     <asp:Button CssClass="form-control" runat="server" OnClientClick="RefreshTable(); return false;" Text="Refresh" />
                 </div>
                 <div class="col-lg-3">
-                    <asp:Button CssClass="form-control" runat="server" Text="Add Product" data-toggle="modal" data-target="#ModalProject"/>
+                    <asp:Button CssClass="form-control" runat="server" Text="Add Project" data-toggle="modal" data-target="#ModalProject"/>
                 </div>
             </div>
         </div>
@@ -95,8 +95,6 @@
         <div class="modal fade" id="ModalUpdateProject" role="dialog">
         <div class="modal-dialog modal-lg" style="max-height: 100%">
             <div class="modal-content">
-                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                    <ContentTemplate>
                         <asp:HiddenField ID="UpdateProject" runat="server" />
                         <div class="modal-header">
                             <asp:Label runat="server" ID="Label2" Text="Create new proejct"></asp:Label>
@@ -160,8 +158,6 @@
                                 </div>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -170,10 +166,8 @@
         <div class="modal fade" id="ModalProject" role="dialog">
         <div class="modal-dialog modal-lg" style="max-height: 100%">
             <div class="modal-content">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
                         <div class="modal-header">
-                            <asp:Label runat="server" ID="projectHeader" Text="Create new proejct"></asp:Label>
+                            <asp:Label runat="server" ID="projectHeader" Text="Create new project"></asp:Label>
                         </div>
                         <div class="modal-body" style="padding-bottom: 50px">
                               <div class="row">
@@ -234,8 +228,6 @@
                                 </div>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -244,8 +236,6 @@
         <div class="modal fade" id="ModalUpdateTask" role="dialog">
         <div class="modal-dialog modal-lg" style="max-height: 100%">
             <div class="modal-content">
-                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                    <ContentTemplate>
                         <asp:HiddenField runat="server" ID="UpdateTaskID" />
                         <div class="modal-header">
                             <asp:Label runat="server" ID="Label1" Text="Create Task"></asp:Label>
@@ -300,8 +290,6 @@
                                 </div>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -310,8 +298,6 @@
         <div class="modal fade" id="ModalTask" role="dialog">
         <div class="modal-dialog modal-lg" style="max-height: 100%">
             <div class="modal-content">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                    <ContentTemplate>
                         <asp:HiddenField runat="server" ID="TaskProjectID" />
                         <div class="modal-header">
                             <asp:Label runat="server" ID="taskHeader" Text="Create Task"></asp:Label>
@@ -366,8 +352,6 @@
                                 </div>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -385,20 +369,38 @@
 
         app.controller("projectController", function ($scope, $http) {
             var url = $("#<%=ProjectsURL.ClientID%>").val();
-            $http.get(url).success(function (response) {
-                $scope.projects = response;
-            }).error(function (response) {
-                console.log(response);
-            });
+
+            $.ajax({
+                method: "GET",
+                url: url,
+                headers: {
+                    "Authorization": sessionStorage.getItem("Token")
+                },
+                success: function (data) {
+                    $scope.projects = data;
+                },
+                error: function (data) {
+                    alert("Erro get projects");
+                }
+            })
         })
 
         app.controller("taskController", function ($scope, $http) {
             var url = $("#<%=TasksURL.ClientID%>").val();
-                $http.get(url).success(function (response) {
-                    $scope.tasks = response;
-                }).error(function (response) {
-                    console.log(response);
-                });
+
+            $.ajax({
+                method: "GET",
+                url: url,
+                headers: {
+                    "Authorization": sessionStorage.getItem("Token")
+                },
+                success: function (data) {
+                    $scope.tasks = data;
+                },
+                error: function (data) {
+                    alert("Erro get tasks");
+                }
+            })
             })
 
         //jquery processing and devexpress tools.

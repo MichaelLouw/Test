@@ -31,15 +31,6 @@ namespace TestWeb {
         protected global::System.Web.UI.WebControls.HiddenField TasksURL;
         
         /// <summary>
-        /// UpdatePanel4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
-        /// <summary>
         /// UpdateProject control.
         /// </summary>
         /// <remarks>
@@ -130,15 +121,6 @@ namespace TestWeb {
         protected global::System.Web.UI.WebControls.DropDownList ddlIs_Active;
         
         /// <summary>
-        /// UpdatePanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
-        /// <summary>
         /// projectHeader control.
         /// </summary>
         /// <remarks>
@@ -220,15 +202,6 @@ namespace TestWeb {
         protected global::System.Web.UI.WebControls.DropDownList txtIs_Active;
         
         /// <summary>
-        /// UpdatePanel3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
-        /// <summary>
         /// UpdateTaskID control.
         /// </summary>
         /// <remarks>
@@ -299,15 +272,6 @@ namespace TestWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
-        /// UpdatePanel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
         /// TaskProjectID control.
