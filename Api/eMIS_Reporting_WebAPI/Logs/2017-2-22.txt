@@ -1,0 +1,95 @@
+2017/02/22 12:26 PM INFO: 11 - Activating User: 3abe6595-1433-49fd-92c5-d0e6e61bda20
+2017/02/22 12:26 PM INFO: 12 - Sending email: 
+2017/02/22 12:26 PM INFO: 14 - Denying User: 
+2017/02/22 12:26 PM INFO: 15 - User Denied: 
+2017/02/22 12:26 PM INFO: 13 - Email sent: 
+2017/02/22 1:17 PM INFO: 11 - Activating User: 85352ade-d447-4f03-ab75-25ce146959ab
+2017/02/22 1:17 PM INFO: 12 - Sending email: 
+2017/02/22 1:17 PM INFO: 13 - Email sent: 
+2017/02/22 1:17 PM INFO: 11 - Activating User: 0db462ba-dcc5-45d1-befe-09ecafb5f86f
+2017/02/22 1:17 PM INFO: 12 - Sending email: 
+2017/02/22 1:17 PM INFO: 13 - Email sent: 
+2017/02/22 1:17 PM INFO: 11 - Activating User: c8905576-13f3-4e20-bd0e-88b0a6d92ad1
+2017/02/22 1:17 PM INFO: 12 - Sending email: 
+2017/02/22 1:17 PM INFO: 13 - Email sent: 
+2017/02/22 1:17 PM INFO: 11 - Activating User: a0cfd77e-b48d-4f77-ac9b-b60b617f7d1a
+2017/02/22 1:17 PM INFO: 12 - Sending email: 
+2017/02/22 1:17 PM INFO: 13 - Email sent: 
+2017/02/22 1:17 PM INFO: 11 - Activating User: 32e6779f-cef1-46dc-ae6f-4927f251b226
+2017/02/22 1:17 PM INFO: 12 - Sending email: 
+2017/02/22 1:17 PM INFO: 13 - Email sent: 
+2017/02/22 1:20 PM INFO: 11 - Activating User: cf38a81f-2a63-4865-bed3-8c2316b3fbd6
+2017/02/22 1:20 PM INFO: 12 - Sending email: 
+2017/02/22 1:20 PM INFO: 13 - Email sent: 
+2017/02/22 1:21 PM INFO: 17 - Archiving user: 
+2017/02/22 1:21 PM ERROR: 17,1 - Archiving user may have failed:Cannot find the UpdateFunctionMapping for EntityType 'Users' in the mapping file.
+2017/02/22 1:27 PM INFO: 17 - Archiving user: 
+2017/02/22 1:27 PM ERROR: 17,1 - Archiving user may have failed:Cannot find the UpdateFunctionMapping for EntityType 'Users' in the mapping file.
+2017/02/22 1:34 PM INFO: 17 - Archiving user: 
+2017/02/22 1:46 PM INFO: 17 - Archiving user: 
+2017/02/22 1:46 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:46 PM INFO: 17 - Archiving user: 
+2017/02/22 1:47 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:48 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:49 PM INFO: 17 - Archiving user: 
+2017/02/22 1:49 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:50 PM INFO: 17 - Archiving user: 
+2017/02/22 1:50 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:50 PM INFO: 17 - Archiving user: 
+2017/02/22 1:50 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:50 PM INFO: 17 - Archiving user: 
+2017/02/22 1:50 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:50 PM INFO: 17 - Archiving user: 
+2017/02/22 1:50 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:50 PM INFO: 17 - Archiving user: 
+2017/02/22 1:50 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:51 PM INFO: 17 - Archiving user: 
+2017/02/22 1:51 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 1:52 PM INFO: 11 - Activating User: 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/22 1:52 PM INFO: 12 - Sending email: 
+2017/02/22 1:52 PM INFO: 13 - Email sent: 
+2017/02/22 2:37 PM INFO: 17 - Archiving user: 
+2017/02/22 2:37 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 3:26 PM INFO: 17 - Archiving user: 
+2017/02/22 3:26 PM INFO: 18 - Archiving user succeeded: 
+2017/02/22 3:41 PM INFO: 17 - Archiving user: 
+2017/02/22 3:41 PM INFO: 18 - Archiving user succeeded: 

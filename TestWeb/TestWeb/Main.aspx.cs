@@ -14,6 +14,12 @@ namespace TestWeb
         {
             ProjectsURL.Value = ConfigurationManager.AppSettings["Projects_Service"].ToString();
             TasksURL.Value = ConfigurationManager.AppSettings["Task_Service"].ToString();
+
+            txtIs_Billable.Items.Add("true");
+            txtIs_Billable.Items.Add("false");
+
+            txtIs_Active.Items.Add("true");
+            txtIs_Active.Items.Add("false");
         }
     }
 }

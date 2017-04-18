@@ -1,0 +1,12 @@
+2017/02/16 8:15 AM ERROR: 0 - Object reference not set to an instance of an object.
+2017/02/16 8:19 AM ERROR: 0 - Object reference not set to an instance of an object.
+2017/02/16 8:55 AM ERROR: 0 - The method or operation is not implemented.
+2017/02/16 9:38 AM ERROR: 0 - The method or operation is not implemented.
+2017/02/16 9:45 AM ERROR: 0 - The method or operation is not implemented.
+2017/02/16 3:07 PM ERROR: 0 - Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+2017/02/16 4:17 PM ERROR: 0 - Object reference not set to an instance of an object.
+2017/02/16 4:18 PM ERROR: 0 - Collection was of a fixed size.
+2017/02/16 4:20 PM ERROR: 0 - Collection was of a fixed size.
+2017/02/16 7:29 PM ERROR: 0 - Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).
+2017/02/16 7:31 PM ERROR: 0 - Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).

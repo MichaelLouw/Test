@@ -1,0 +1,17 @@
+2017/02/10 8:08 AM ERROR: 0 - An error occurred while updating the entries. See the inner exception for details.
+2017/02/10 9:08 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:09 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:10 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:12 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:16 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:17 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:17 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:18 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:18 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:27 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:28 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:28 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:41 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:43 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 9:43 AM ERROR: 0 - The entity type BO_User is not part of the model for the current context.
+2017/02/10 11:41 AM ERROR: 0 - Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).

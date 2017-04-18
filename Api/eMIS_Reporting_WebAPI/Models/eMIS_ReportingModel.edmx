@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="eMIS_ReportingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Areas">
+          <Key>
+            <PropertyRef Name="Area_ID" />
+          </Key>
+          <Property Name="Area_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Area_Name" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Department_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Municipality_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Municipalities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Municipality" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="reportId" />
+          </Key>
+          <Property Name="reportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reportName" Type="varchar" MaxLength="1000" />
+          <Property Name="reportDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="parentReportId" Type="int" />
+          <Property Name="reportPath" Type="varchar" MaxLength="1000" />
+          <Property Name="reportIcon" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="Surname" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+          <Property Name="Security_Level" Type="int" />
+          <Property Name="Contact_Number" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Department" Type="varchar" MaxLength="250" />
+          <Property Name="Municipality" Type="varchar" MaxLength="250" />
+          <Property Name="StatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="UserStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Function Name="spActivateEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Guid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spActivateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spDenyUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spGetDepartments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="municipalityID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spGetReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetUserByEmailPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Number" Type="varchar" Mode="In" />
+          <Parameter Name="Department" Type="varchar" Mode="In" />
+          <Parameter Name="Municipality" Type="varchar" Mode="In" />
+          <Parameter Name="StatusID" Type="int" Mode="In" />
+          <Parameter Name="Security_Level" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spSaveNewPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NewPass" Type="varchar" Mode="In" />
+          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spSearchReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="search" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdateStatusID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="statusID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="eMIS_ReportingModelStoreContainer">
+          <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipalities" EntityType="Self.Municipalities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStatus" EntityType="Self.UserStatus" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eMIS_ReportingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="reportId" />
+          </Key>
+          <Property Name="reportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reportName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="reportDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="parentReportId" Type="Int32" />
+          <Property Name="reportPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="reportIcon" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="eMIS_ReportingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <FunctionImport Name="spGetReports" ReturnType="Collection(eMIS_ReportingModel.spGetReports_Result)" />
+          <FunctionImport Name="spGetUserByEmailPassword" ReturnType="Collection(eMIS_ReportingModel.spGetUserByEmailPassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSearchReports" ReturnType="Collection(eMIS_ReportingModel.spSearchReports_Result)">
+          <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Areas" EntityType="eMIS_ReportingModel.Area" />
+          <EntitySet Name="Departments" EntityType="eMIS_ReportingModel.Department" />
+          <EntitySet Name="UserStatus" EntityType="eMIS_ReportingModel.UserStatu" />
+          <FunctionImport Name="spGetDepartments" ReturnType="Collection(eMIS_ReportingModel.spGetDepartments_Result)" >
+          <Parameter Name="municipalityID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetPassword" ReturnType="Collection(String)">
+          <Parameter Name="id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertNewUser">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Number" Mode="In" Type="String" />
+            <Parameter Name="Department" Mode="In" Type="String" />
+            <Parameter Name="Municipality" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSaveNewPassword">
+            <Parameter Name="NewPass" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="Municipalities" EntityType="eMIS_ReportingModel.Municipality" />
+          <FunctionImport Name="spActivateEmail">
+          <Parameter Name="Guid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="spActivateUser" ReturnType="Collection(eMIS_ReportingModel.spActivateUser_Result)">
+          <Parameter Name="userID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="spDenyUser" ReturnType="Collection(eMIS_ReportingModel.spDenyUser_Result)">
+          <Parameter Name="userID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertNewUser1">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Number" Mode="In" Type="String" />
+            <Parameter Name="Department" Mode="In" Type="String" />
+            <Parameter Name="Municipality" Mode="In" Type="String" />
+            <Parameter Name="StatusID" Mode="In" Type="Int32" />
+            <Parameter Name="Security_Level" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Users1" EntityType="eMIS_ReportingModel.Users" />
+          <FunctionImport Name="spUpdateStatusID">
+            <Parameter Name="userID" Mode="In" Type="Guid" />
+            <Parameter Name="statusID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchReports" EntitySet="Reports" ReturnType="Collection(eMIS_ReportingModel.Report)">
+            <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSearchReports1" ReturnType="Collection(eMIS_ReportingModel.spSearchReports_Result)">
+            <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spGetReports_Result">
+          <Property Type="Int32" Name="reportId" Nullable="false" />
+          <Property Type="String" Name="reportName" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="reportDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="parentReportId" Nullable="true" />
+          <Property Type="String" Name="reportPath" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="reportIcon" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spGetUserByEmailPassword_Result">
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Surname" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Security_Level" Nullable="true" />
+          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="User_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Municipality" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spSearchReports_Result">
+          <Property Type="Int32" Name="reportId" Nullable="false" />
+          <Property Type="String" Name="reportName" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="reportDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="parentReportId" Nullable="true" />
+          <Property Type="String" Name="reportPath" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="reportIcon" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Area_ID" />
+          </Key>
+          <Property Name="Area_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Area_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Department_ID" />
+          </Key>
+          <Property Name="Department_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Department_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Municipality_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UserStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="spGetDepartments_Result">
+          <Property Type="Int32" Name="Department_ID" Nullable="false" />
+          <Property Type="String" Name="Department_Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Municipality_ID" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Municipality">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Municipality1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="spActivateUser_Result">
+          <Property Type="Guid" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Surname" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Security_Level" Nullable="true" />
+          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Municipality" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spDenyUser_Result">
+          <Property Type="Guid" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Surname" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Security_Level" Nullable="true" />
+          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Municipality" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="StatusID" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Security_Level" Type="Int32" />
+          <Property Name="Contact_Number" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Municipality" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eMIS_ReportingModelStoreContainer" CdmEntityContainer="eMIS_ReportingEntities">
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="reportName" ColumnName="reportName" />
+                <ScalarProperty Name="reportDescription" ColumnName="reportDescription" />
+                <ScalarProperty Name="parentReportId" ColumnName="parentReportId" />
+                <ScalarProperty Name="reportPath" ColumnName="reportPath" />
+                <ScalarProperty Name="reportIcon" ColumnName="reportIcon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetReports" FunctionName="eMIS_ReportingModel.Store.spGetReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spGetReports_Result">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="reportName" ColumnName="reportName" />
+                <ScalarProperty Name="reportDescription" ColumnName="reportDescription" />
+                <ScalarProperty Name="parentReportId" ColumnName="parentReportId" />
+                <ScalarProperty Name="reportPath" ColumnName="reportPath" />
+                <ScalarProperty Name="reportIcon" ColumnName="reportIcon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetUserByEmailPassword" FunctionName="eMIS_ReportingModel.Store.spGetUserByEmailPassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spGetUserByEmailPassword_Result">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Security_Level" ColumnName="Security_Level" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spSearchReports" FunctionName="eMIS_ReportingModel.Store.spSearchReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spSearchReports_Result">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="reportName" ColumnName="reportName" />
+                <ScalarProperty Name="reportDescription" ColumnName="reportDescription" />
+                <ScalarProperty Name="parentReportId" ColumnName="parentReportId" />
+                <ScalarProperty Name="reportPath" ColumnName="reportPath" />
+                <ScalarProperty Name="reportIcon" ColumnName="reportIcon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.Area">
+              <MappingFragment StoreEntitySet="Areas">
+                <ScalarProperty Name="Area_Name" ColumnName="Area_Name" />
+                <ScalarProperty Name="Area_ID" ColumnName="Area_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Municipality_ID" ColumnName="Municipality_ID" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStatus">
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.UserStatu">
+              <MappingFragment StoreEntitySet="UserStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetDepartments" FunctionName="eMIS_ReportingModel.Store.spGetDepartments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spGetDepartments_Result">
+                <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Municipality_ID" ColumnName="Municipality_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetPassword" FunctionName="eMIS_ReportingModel.Store.spGetPassword" />
+          <FunctionImportMapping FunctionImportName="spSaveNewPassword" FunctionName="eMIS_ReportingModel.Store.spSaveNewPassword" />
+          <EntitySetMapping Name="Municipalities">
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.Municipality">
+              <MappingFragment StoreEntitySet="Municipalities">
+                <ScalarProperty Name="Municipality1" ColumnName="Municipality" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spActivateEmail" FunctionName="eMIS_ReportingModel.Store.spActivateEmail" />
+          <FunctionImportMapping FunctionImportName="spActivateUser" FunctionName="eMIS_ReportingModel.Store.spActivateUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spActivateUser_Result">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Security_Level" ColumnName="Security_Level" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spDenyUser" FunctionName="eMIS_ReportingModel.Store.spDenyUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spDenyUser_Result">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Security_Level" ColumnName="Security_Level" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInsertNewUser1" FunctionName="eMIS_ReportingModel.Store.spInsertNewUser" />
+          <EntitySetMapping Name="Users1">
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Security_Level" ColumnName="Security_Level" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="eMIS_ReportingModel.Users">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="eMIS_ReportingModel.Store.spInsertNewUser">
+                  <ScalarProperty Name="Security_Level" ParameterName="Security_Level" />
+                  <ScalarProperty Name="StatusID" ParameterName="StatusID" />
+                  <ScalarProperty Name="Contact_Number" ParameterName="Number" />
+                  <ScalarProperty Name="Municipality" ParameterName="Municipality" />
+                  <ScalarProperty Name="Department" ParameterName="Department" />
+                  <ScalarProperty Name="Email" ParameterName="Email" />
+                  <ScalarProperty Name="Password" ParameterName="Password" />
+                  <ScalarProperty Name="Surname" ParameterName="Surname" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="eMIS_ReportingModel.Store.spUpdateStatusID" >
+                  <ScalarProperty Name="StatusID" ParameterName="statusID" Version="Current" />
+                  <ScalarProperty Name="User_ID" ParameterName="userID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spUpdateStatusID" FunctionName="eMIS_ReportingModel.Store.spUpdateStatusID" />
+          <FunctionImportMapping FunctionImportName="SearchReports" FunctionName="eMIS_ReportingModel.Store.spSearchReports" />
+          <FunctionImportMapping FunctionImportName="spSearchReports1" FunctionName="eMIS_ReportingModel.Store.spSearchReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eMIS_ReportingModel.spSearchReports_Result">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="reportName" ColumnName="reportName" />
+                <ScalarProperty Name="reportDescription" ColumnName="reportDescription" />
+                <ScalarProperty Name="parentReportId" ColumnName="parentReportId" />
+                <ScalarProperty Name="reportPath" ColumnName="reportPath" />
+                <ScalarProperty Name="reportIcon" ColumnName="reportIcon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

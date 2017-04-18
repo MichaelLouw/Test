@@ -1,0 +1,64 @@
+2017/02/24 10:37 AM INFO: 6 - Adding User: 
+2017/02/24 10:37 AM ERROR: 10 - Value cannot be null.
+Parameter name: addresses
+2017/02/24 10:37 AM ERROR: 9 - Failed to register user
+2017/02/24 1:47 PM INFO: 6 - Adding User: 
+2017/02/24 1:47 PM ERROR: 10 - Value cannot be null.
+Parameter name: addresses
+2017/02/24 1:47 PM ERROR: 9 - Failed to register user
+2017/02/24 4:26 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 4:26 PM INFO: 6 - Adding User: michaelgoogle@gmail.com
+2017/02/24 4:26 PM INFO: 7 - SendingEmail: michaelgoogle@gmail.com
+2017/02/24 4:26 PM INFO: 8 - Email sent: michaelgoogle@gmail.com
+2017/02/24 4:27 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 4:27 PM INFO: 6 - Adding User: michaelf@gmail.com
+2017/02/24 4:27 PM INFO: 7 - SendingEmail: michaelf@gmail.com
+2017/02/24 4:27 PM INFO: 8 - Email sent: michaelf@gmail.com
+2017/02/24 4:30 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 4:30 PM INFO: 6 - Adding User: michaelf1@gmail.com
+2017/02/24 4:30 PM INFO: 7 - SendingEmail: michaelf1@gmail.com
+2017/02/24 4:30 PM INFO: 8 - Email sent: michaelf1@gmail.com
+2017/02/24 5:18 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:18 PM INFO: 6 - Adding User: michaelfgmail.com
+2017/02/24 5:18 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 5:18 PM ERROR: 9 - Failed to register user
+2017/02/24 5:23 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:23 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:24 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:24 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:31 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:31 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:40 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:40 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:50 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:50 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:50 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:52 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:53 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:53 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 5:53 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 6:04 PM INFO: 6 - MANUALLY ADDING USER: michaelf@softwareworx.co.za
+2017/02/24 6:04 PM INFO: 7 - SendingEmail: michaelf@softwareworx.co.za
+2017/02/24 6:04 PM INFO: 8 - Email sent: michaelf@softwareworx.co.za
+2017/02/24 6:04 PM INFO: 5,2 - User was manually added by user with user_id : 7fe18515-dba8-4b38-a912-e109ab1dbe24
+2017/02/24 6:16 PM INFO: 6 - MANUALLY ADDING USER: michaemail.com
+2017/02/24 6:16 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:16 PM ERROR: 9 - Failed to register user
+2017/02/24 6:19 PM INFO: 6 - MANUALLY ADDING USER: michagmail.com
+2017/02/24 6:19 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:19 PM ERROR: 9 - Failed to register user
+2017/02/24 6:22 PM INFO: 6 - MANUALLY ADDING USER: michamail.com
+2017/02/24 6:22 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:22 PM ERROR: 9 - Failed to register user
+2017/02/24 6:25 PM INFO: 6 - MANUALLY ADDING USER: mmail.com
+2017/02/24 6:25 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:25 PM ERROR: 9 - Failed to register user
+2017/02/24 6:34 PM INFO: 6 - MANUALLY ADDING USER: mail.com
+2017/02/24 6:34 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:34 PM ERROR: 9 - Failed to register user
+2017/02/24 6:34 PM INFO: 6 - MANUALLY ADDING USER: m1ail.com
+2017/02/24 6:35 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:35 PM ERROR: 9 - Failed to register user
+2017/02/24 6:35 PM INFO: 6 - MANUALLY ADDING USER: m2ail.com
+2017/02/24 6:36 PM ERROR: 10 - The specified string is not in the form required for an e-mail address.
+2017/02/24 6:36 PM ERROR: 9 - Failed to register user

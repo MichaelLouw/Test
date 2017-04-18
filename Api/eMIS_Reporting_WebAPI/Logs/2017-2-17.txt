@@ -1,0 +1,44 @@
+2017/02/17 9:30 AM INFO: 0 - Adding User
+2017/02/17 9:37 AM INFO: 0 - Adding User
+2017/02/17 9:47 AM INFO: 0 - Adding User
+2017/02/17 9:49 AM INFO: 0 - Adding User
+2017/02/17 9:50 AM INFO: 0 - Adding User
+2017/02/17 9:50 AM INFO: 0 - Adding User
+2017/02/17 10:59 AM INFO: 0 - Adding User
+2017/02/17 1:03 PM INFO: 6 - Adding User: jshjkdfh@kjhwekjfhd.com
+2017/02/17 1:04 PM INFO: 7 - SendingEmail: jshjkdfh@kjhwekjfhd.com
+2017/02/17 1:04 PM INFO: 8 - Email sent: jshjkdfh@kjhwekjfhd.com
+2017/02/17 1:06 PM INFO: 6 - Adding User: hhghdjf@jfjkf.com
+2017/02/17 1:07 PM INFO: 6,1 - No User returned from DB: System.Data.DataRow
+2017/02/17 1:07 PM INFO: 7 - SendingEmail: hhghdjf@jfjkf.com
+2017/02/17 1:07 PM INFO: 8 - Email sent: hhghdjf@jfjkf.com
+2017/02/17 1:15 PM INFO: 6 - Adding User: hdfskhf@kjhdfkj.com
+2017/02/17 1:15 PM INFO: 6 - var email: hdfskhf@kjhdfkj.com
+2017/02/17 1:15 PM INFO: 6 - var password: 1
+2017/02/17 1:15 PM INFO: 6,1 - No User returned from DB: 1689c72e-aaca-459d-b5fc-d213532d4096
+2017/02/17 1:15 PM INFO: 7 - SendingEmail: hdfskhf@kjhdfkj.com
+2017/02/17 1:15 PM INFO: 8 - Email sent: hdfskhf@kjhdfkj.com
+2017/02/17 2:00 PM INFO: 6 - Adding User: jfbkdh@jhdfjh.com
+2017/02/17 2:00 PM INFO: 6 - x: 1
+2017/02/17 2:00 PM INFO: 6 - var email: jfbkdh@jhdfjh.com
+2017/02/17 2:00 PM INFO: 6 - var password: 1
+2017/02/17 2:00 PM INFO: 7 - SendingEmail: jfbkdh@jhdfjh.com
+2017/02/17 2:00 PM INFO: 8 - Email sent: jfbkdh@jhdfjh.com
+2017/02/17 2:56 PM INFO: 6 - Adding User: hdkgfdhg@sdjkghkdjfg.com
+2017/02/17 2:56 PM INFO: 6 - x: 1
+2017/02/17 2:56 PM INFO: 6 - var email: hdkgfdhg@sdjkghkdjfg.com
+2017/02/17 2:56 PM INFO: 6 - var password: 1
+2017/02/17 2:56 PM INFO: 7 - SendingEmail: hdkgfdhg@sdjkghkdjfg.com
+2017/02/17 2:56 PM INFO: 8 - Email sent: hdkgfdhg@sdjkghkdjfg.com
+2017/02/17 3:13 PM INFO: 6 - Adding User: dfhgh@dfjd.com
+2017/02/17 3:14 PM INFO: 6 - x: 1
+2017/02/17 3:14 PM INFO: 6 - var email: dfhgh@dfjd.com
+2017/02/17 3:14 PM INFO: 6 - var password: 1
+2017/02/17 3:14 PM INFO: 7 - SendingEmail: dfhgh@dfjd.com
+2017/02/17 3:14 PM INFO: 8 - Email sent: dfhgh@dfjd.com
+2017/02/17 4:27 PM ERROR: 5 - Object reference not set to an instance of an object.
+2017/02/17 4:27 PM INFO: 3 - Forgot password send email: michaellouwa380@gmail.com
+2017/02/17 4:27 PM INFO: 4 - Forgot password email sent: michaellouwa380@gmail.com
+2017/02/17 4:28 PM INFO: 6 - Adding User: jhgdf@hkjdhg.com
+2017/02/17 4:28 PM INFO: 7 - SendingEmail: jhgdf@hkjdhg.com
+2017/02/17 4:28 PM INFO: 8 - Email sent: jhgdf@hkjdhg.com

@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'WMS.dbo.Ancel' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Ancel">
+          <Property Name="test" Type="nchar" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WMS.dbo.BO_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BO_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="Surname" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+          <Property Name="Security_Level" Type="int" />
+          <Property Name="Contact_Number" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="User_Name" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WMS.dbo.Customer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="RECNUM" />
+            <PropertyRef Name="Customer_Number" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Zip" />
+            <PropertyRef Name="Phone_Number" />
+            <PropertyRef Name="Fax_Number" />
+            <PropertyRef Name="EMail_Address" />
+            <PropertyRef Name="Credit_Limit" />
+            <PropertyRef Name="Purchases" />
+            <PropertyRef Name="Balance" />
+            <PropertyRef Name="Comments" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="RECNUM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_Number" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Address" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="City" Type="char" MaxLength="14" Nullable="false" />
+          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Zip" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Phone_Number" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Fax_Number" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="EMail_Address" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Credit_Limit" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Purchases" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Comments" Type="text" Nullable="false" />
+          <Property Name="Status" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WMS.dbo.Finance_Demo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Finance_Demo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Spent" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WMS.dbo.Finance_Demo2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Finance_Demo2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Spent" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WMS.dbo.M_Dash_Totals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="M_Dash_Totals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="DEPT" Type="varchar" MaxLength="50" />
+          <Property Name="Total_Jobs" Type="int" />
+          <Property Name="Jobs_Over" Type="int" />
+          <Property Name="Jobs_in_Time" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Job_Type" Type="varchar" MaxLength="20" />
+          <Property Name="Jobs_no_Response_Time" Type="int" />
+          <Property Name="Open_Jobs_inside_response_time_framework" Type="int" />
+          <Property Name="Open_Jobs_outside_response_time_framework" Type="int" />
+          <Property Name="Open_Jobs_outside_respons_frame_1" Type="int" />
+          <Property Name="Open_Jobs_outside_respons_frame_2" Type="int" />
+          <Property Name="Open_Jobs_outside_respons_frame_3" Type="int" />
+          <Property Name="Percent_Total_SD_Outside" Type="float" />
+          <Property Name="Percent_SD_Open_Outside" Type="float" />
+        </EntityType>
+        <EntityType Name="Report_Data">
+          <Key>
+            <PropertyRef Name="Control_Number" />
+          </Key>
+          <Property Name="Control_Number" Type="int" Nullable="false" />
+          <Property Name="Receive_Date" Type="datetime" />
+          <Property Name="Finish_Date" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Status_Date" Type="datetime" />
+          <Property Name="Department" Type="varchar" MaxLength="250" />
+          <Property Name="Fault" Type="varchar" MaxLength="250" />
+          <Property Name="Area" Type="varchar" MaxLength="500" />
+          <Property Name="GIS_ID" Type="int" />
+          <Property Name="Township" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'WMS.dbo.Report_Status' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Report_Status">
+          <Property Name="Data_Refresh" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WMS.dbo.SQL_DASH' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SQL_DASH">
+          <Key>
+            <PropertyRef Name="CTRL" />
+            <PropertyRef Name="CRDATE" />
+            <PropertyRef Name="CRTIME" />
+            <PropertyRef Name="CWTIME" />
+            <PropertyRef Name="STATUS" />
+            <PropertyRef Name="STATUS_DATE" />
+            <PropertyRef Name="DEPT" />
+            <PropertyRef Name="FAULT_TYPE" />
+            <PropertyRef Name="AREA" />
+            <PropertyRef Name="GISKEY" />
+            <PropertyRef Name="TOWNSHIP" />
+            <PropertyRef Name="RESPONSE_TIME" />
+          </Key>
+          <Property Name="CTRL" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CRDATE" Type="datetime" Nullable="false" />
+          <Property Name="CRTIME" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="CWDATE" Type="datetime" />
+          <Property Name="CWTIME" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="STATUS" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="STATUS_DATE" Type="datetime" Nullable="false" />
+          <Property Name="DEPT" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="FAULT_TYPE" Type="char" MaxLength="40" Nullable="false" />
+          <Property Name="AREA" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="GISKEY" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="TOWNSHIP" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="RESPONSE_TIME" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <Function Name="spGetReferenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CTRL" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetUserByEmailPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="WMSModelStoreContainer">
+          <EntitySet Name="Report_Data" EntityType="Self.Report_Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BO_User" EntityType="Self.BO_User" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BO_User].[User_ID] AS [User_ID], 
+    [BO_User].[Name] AS [Name], 
+    [BO_User].[Surname] AS [Surname], 
+    [BO_User].[Password] AS [Password], 
+    [BO_User].[Security_Level] AS [Security_Level], 
+    [BO_User].[Contact_Number] AS [Contact_Number], 
+    [BO_User].[Email] AS [Email], 
+    [BO_User].[User_Name] AS [User_Name]
+    FROM [dbo].[BO_User] AS [BO_User]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Customer" EntityType="Self.Customer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer].[RECNUM] AS [RECNUM], 
+    [Customer].[Customer_Number] AS [Customer_Number], 
+    [Customer].[Name] AS [Name], 
+    [Customer].[Address] AS [Address], 
+    [Customer].[City] AS [City], 
+    [Customer].[State] AS [State], 
+    [Customer].[Zip] AS [Zip], 
+    [Customer].[Phone_Number] AS [Phone_Number], 
+    [Customer].[Fax_Number] AS [Fax_Number], 
+    [Customer].[EMail_Address] AS [EMail_Address], 
+    [Customer].[Credit_Limit] AS [Credit_Limit], 
+    [Customer].[Purchases] AS [Purchases], 
+    [Customer].[Balance] AS [Balance], 
+    [Customer].[Comments] AS [Comments], 
+    [Customer].[Status] AS [Status]
+    FROM [dbo].[Customer] AS [Customer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Finance_Demo" EntityType="Self.Finance_Demo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Finance_Demo].[ID] AS [ID], 
+    [Finance_Demo].[Date] AS [Date], 
+    [Finance_Demo].[Amount] AS [Amount], 
+    [Finance_Demo].[Spent] AS [Spent]
+    FROM [dbo].[Finance_Demo] AS [Finance_Demo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Finance_Demo2" EntityType="Self.Finance_Demo2" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Finance_Demo2].[ID] AS [ID], 
+    [Finance_Demo2].[Date] AS [Date], 
+    [Finance_Demo2].[Amount] AS [Amount], 
+    [Finance_Demo2].[Spent] AS [Spent]
+    FROM [dbo].[Finance_Demo2] AS [Finance_Demo2]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="M_Dash_Totals" EntityType="Self.M_Dash_Totals" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [M_Dash_Totals].[DEPT] AS [DEPT], 
+    [M_Dash_Totals].[Total_Jobs] AS [Total_Jobs], 
+    [M_Dash_Totals].[Jobs_Over] AS [Jobs_Over], 
+    [M_Dash_Totals].[Jobs_in_Time] AS [Jobs_in_Time], 
+    [M_Dash_Totals].[ID] AS [ID], 
+    [M_Dash_Totals].[Job_Type] AS [Job_Type], 
+    [M_Dash_Totals].[Jobs_no_Response_Time] AS [Jobs_no_Response_Time], 
+    [M_Dash_Totals].[Open_Jobs_inside_response_time_framework] AS [Open_Jobs_inside_response_time_framework], 
+    [M_Dash_Totals].[Open_Jobs_outside_response_time_framework] AS [Open_Jobs_outside_response_time_framework], 
+    [M_Dash_Totals].[Open_Jobs_outside_respons_frame_1] AS [Open_Jobs_outside_respons_frame_1], 
+    [M_Dash_Totals].[Open_Jobs_outside_respons_frame_2] AS [Open_Jobs_outside_respons_frame_2], 
+    [M_Dash_Totals].[Open_Jobs_outside_respons_frame_3] AS [Open_Jobs_outside_respons_frame_3], 
+    [M_Dash_Totals].[Percent_Total_SD_Outside] AS [Percent_Total_SD_Outside], 
+    [M_Dash_Totals].[Percent_SD_Open_Outside] AS [Percent_SD_Open_Outside]
+    FROM [dbo].[M_Dash_Totals] AS [M_Dash_Totals]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SQL_DASH" EntityType="Self.SQL_DASH" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SQL_DASH].[CTRL] AS [CTRL], 
+    [SQL_DASH].[CRDATE] AS [CRDATE], 
+    [SQL_DASH].[CRTIME] AS [CRTIME], 
+    [SQL_DASH].[CWDATE] AS [CWDATE], 
+    [SQL_DASH].[CWTIME] AS [CWTIME], 
+    [SQL_DASH].[STATUS] AS [STATUS], 
+    [SQL_DASH].[STATUS_DATE] AS [STATUS_DATE], 
+    [SQL_DASH].[DEPT] AS [DEPT], 
+    [SQL_DASH].[FAULT_TYPE] AS [FAULT_TYPE], 
+    [SQL_DASH].[AREA] AS [AREA], 
+    [SQL_DASH].[GISKEY] AS [GISKEY], 
+    [SQL_DASH].[TOWNSHIP] AS [TOWNSHIP], 
+    [SQL_DASH].[RESPONSE_TIME] AS [RESPONSE_TIME]
+    FROM [dbo].[SQL_DASH] AS [SQL_DASH]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Report_Data">
+          <Key>
+            <PropertyRef Name="Control_Number" />
+          </Key>
+          <Property Name="Control_Number" Type="Int32" Nullable="false" />
+          <Property Name="Receive_Date" Type="DateTime" Precision="3" />
+          <Property Name="Finish_Date" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status_Date" Type="DateTime" Precision="3" />
+          <Property Name="Department" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Fault" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="GIS_ID" Type="Int32" />
+          <Property Name="Township" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BO_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Security_Level" Type="Int32" />
+          <Property Name="Contact_Number" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="User_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="RECNUM" />
+            <PropertyRef Name="Customer_Number" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Zip" />
+            <PropertyRef Name="Phone_Number" />
+            <PropertyRef Name="Fax_Number" />
+            <PropertyRef Name="EMail_Address" />
+            <PropertyRef Name="Credit_Limit" />
+            <PropertyRef Name="Purchases" />
+            <PropertyRef Name="Balance" />
+            <PropertyRef Name="Comments" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="RECNUM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_Number" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="14" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Fax_Number" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EMail_Address" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Credit_Limit" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Purchases" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Finance_Demo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Spent" Type="Double" />
+        </EntityType>
+        <EntityType Name="Finance_Demo2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Spent" Type="Double" />
+        </EntityType>
+        <EntityType Name="M_Dash_Totals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="DEPT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Jobs" Type="Int32" />
+          <Property Name="Jobs_Over" Type="Int32" />
+          <Property Name="Jobs_in_Time" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job_Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Jobs_no_Response_Time" Type="Int32" />
+          <Property Name="Open_Jobs_inside_response_time_framework" Type="Int32" />
+          <Property Name="Open_Jobs_outside_response_time_framework" Type="Int32" />
+          <Property Name="Open_Jobs_outside_respons_frame_1" Type="Int32" />
+          <Property Name="Open_Jobs_outside_respons_frame_2" Type="Int32" />
+          <Property Name="Open_Jobs_outside_respons_frame_3" Type="Int32" />
+          <Property Name="Percent_Total_SD_Outside" Type="Double" />
+          <Property Name="Percent_SD_Open_Outside" Type="Double" />
+        </EntityType>
+        <EntityType Name="SQL_DASH">
+          <Key>
+            <PropertyRef Name="CTRL" />
+            <PropertyRef Name="CRDATE" />
+            <PropertyRef Name="CRTIME" />
+            <PropertyRef Name="CWTIME" />
+            <PropertyRef Name="STATUS" />
+            <PropertyRef Name="STATUS_DATE" />
+            <PropertyRef Name="DEPT" />
+            <PropertyRef Name="FAULT_TYPE" />
+            <PropertyRef Name="AREA" />
+            <PropertyRef Name="GISKEY" />
+            <PropertyRef Name="TOWNSHIP" />
+            <PropertyRef Name="RESPONSE_TIME" />
+          </Key>
+          <Property Name="CTRL" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CRDATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CRTIME" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CWDATE" Type="DateTime" Precision="3" />
+          <Property Name="CWTIME" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="STATUS_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DEPT" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FAULT_TYPE" Type="String" MaxLength="40" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="AREA" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="GISKEY" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TOWNSHIP" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="RESPONSE_TIME" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Report_Data" EntityType="Self.Report_Data" />
+          <EntitySet Name="BO_User" EntityType="Self.BO_User" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Finance_Demo" EntityType="Self.Finance_Demo" />
+          <EntitySet Name="Finance_Demo2" EntityType="Self.Finance_Demo2" />
+          <EntitySet Name="M_Dash_Totals" EntityType="Self.M_Dash_Totals" />
+          <EntitySet Name="SQL_DASH" EntityType="Self.SQL_DASH" />
+          <FunctionImport Name="spGetReferenceNumber" ReturnType="Collection(WMSModel.spGetReferenceNumber_Result)">
+            <Parameter Name="CTRL" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetUserByEmailPassword" ReturnType="Collection(WMSModel.spGetUserByEmailPassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spGetReferenceNumber_Result">
+          <Property Type="Decimal" Name="CTRL" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="DateTime" Name="CRDATE" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CRTIME" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="CWDATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CWTIME" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="STATUS" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="STATUS_DATE" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DEPT" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="FAULT_TYPE" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="AREA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="GISKEY" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TOWNSHIP" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="RESPONSE_TIME" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Int32" Name="Cntrl_num" Nullable="true" />
+          <Property Type="DateTime" Name="Duration" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Fault" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Township1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Stand" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Street" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Street_No" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Comments" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Recieved_HD" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Receive_DateT" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Start_DateT" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Delay_DateT" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Completed_DateT" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Escalation_Time" Nullable="true" />
+          <Property Type="String" Name="Assigned_unit_Mac" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Completed_Desc" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Delayed_Desc" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Revison" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="String" Name="Data_Changed" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Client_Mun" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spGetUserByEmailPassword_Result">
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Surname" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Security_Level" Nullable="true" />
+          <Property Type="String" Name="Contact_Number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="User_Name" Nullable="true" MaxLength="250" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WMSModelStoreContainer" CdmEntityContainer="WMSEntities">
+          <EntitySetMapping Name="Report_Data">
+            <EntityTypeMapping TypeName="WMSModel.Report_Data">
+              <MappingFragment StoreEntitySet="Report_Data">
+                <ScalarProperty Name="Control_Number" ColumnName="Control_Number" />
+                <ScalarProperty Name="Receive_Date" ColumnName="Receive_Date" />
+                <ScalarProperty Name="Finish_Date" ColumnName="Finish_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Status_Date" ColumnName="Status_Date" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Fault" ColumnName="Fault" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="GIS_ID" ColumnName="GIS_ID" />
+                <ScalarProperty Name="Township" ColumnName="Township" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BO_User">
+            <EntityTypeMapping TypeName="WMSModel.BO_User">
+              <MappingFragment StoreEntitySet="BO_User">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Security_Level" ColumnName="Security_Level" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="WMSModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="RECNUM" ColumnName="RECNUM" />
+                <ScalarProperty Name="Customer_Number" ColumnName="Customer_Number" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Fax_Number" ColumnName="Fax_Number" />
+                <ScalarProperty Name="EMail_Address" ColumnName="EMail_Address" />
+                <ScalarProperty Name="Credit_Limit" ColumnName="Credit_Limit" />
+                <ScalarProperty Name="Purchases" ColumnName="Purchases" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Finance_Demo">
+            <EntityTypeMapping TypeName="WMSModel.Finance_Demo">
+              <MappingFragment StoreEntitySet="Finance_Demo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Spent" ColumnName="Spent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Finance_Demo2">
+            <EntityTypeMapping TypeName="WMSModel.Finance_Demo2">
+              <MappingFragment StoreEntitySet="Finance_Demo2">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Spent" ColumnName="Spent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Dash_Totals">
+            <EntityTypeMapping TypeName="WMSModel.M_Dash_Totals">
+              <MappingFragment StoreEntitySet="M_Dash_Totals">
+                <ScalarProperty Name="DEPT" ColumnName="DEPT" />
+                <ScalarProperty Name="Total_Jobs" ColumnName="Total_Jobs" />
+                <ScalarProperty Name="Jobs_Over" ColumnName="Jobs_Over" />
+                <ScalarProperty Name="Jobs_in_Time" ColumnName="Jobs_in_Time" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Job_Type" ColumnName="Job_Type" />
+                <ScalarProperty Name="Jobs_no_Response_Time" ColumnName="Jobs_no_Response_Time" />
+                <ScalarProperty Name="Open_Jobs_inside_response_time_framework" ColumnName="Open_Jobs_inside_response_time_framework" />
+                <ScalarProperty Name="Open_Jobs_outside_response_time_framework" ColumnName="Open_Jobs_outside_response_time_framework" />
+                <ScalarProperty Name="Open_Jobs_outside_respons_frame_1" ColumnName="Open_Jobs_outside_respons_frame_1" />
+                <ScalarProperty Name="Open_Jobs_outside_respons_frame_2" ColumnName="Open_Jobs_outside_respons_frame_2" />
+                <ScalarProperty Name="Open_Jobs_outside_respons_frame_3" ColumnName="Open_Jobs_outside_respons_frame_3" />
+                <ScalarProperty Name="Percent_Total_SD_Outside" ColumnName="Percent_Total_SD_Outside" />
+                <ScalarProperty Name="Percent_SD_Open_Outside" ColumnName="Percent_SD_Open_Outside" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SQL_DASH">
+            <EntityTypeMapping TypeName="WMSModel.SQL_DASH">
+              <MappingFragment StoreEntitySet="SQL_DASH">
+                <ScalarProperty Name="CTRL" ColumnName="CTRL" />
+                <ScalarProperty Name="CRDATE" ColumnName="CRDATE" />
+                <ScalarProperty Name="CRTIME" ColumnName="CRTIME" />
+                <ScalarProperty Name="CWDATE" ColumnName="CWDATE" />
+                <ScalarProperty Name="CWTIME" ColumnName="CWTIME" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="STATUS_DATE" ColumnName="STATUS_DATE" />
+                <ScalarProperty Name="DEPT" ColumnName="DEPT" />
+                <ScalarProperty Name="FAULT_TYPE" ColumnName="FAULT_TYPE" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="GISKEY" ColumnName="GISKEY" />
+                <ScalarProperty Name="TOWNSHIP" ColumnName="TOWNSHIP" />
+                <ScalarProperty Name="RESPONSE_TIME" ColumnName="RESPONSE_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetReferenceNumber" FunctionName="WMSModel.Store.spGetReferenceNumber">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WMSModel.spGetReferenceNumber_Result">
+                <ScalarProperty Name="CTRL" ColumnName="CTRL" />
+                <ScalarProperty Name="CRDATE" ColumnName="CRDATE" />
+                <ScalarProperty Name="CRTIME" ColumnName="CRTIME" />
+                <ScalarProperty Name="CWDATE" ColumnName="CWDATE" />
+                <ScalarProperty Name="CWTIME" ColumnName="CWTIME" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="STATUS_DATE" ColumnName="STATUS_DATE" />
+                <ScalarProperty Name="DEPT" ColumnName="DEPT" />
+                <ScalarProperty Name="FAULT_TYPE" ColumnName="FAULT_TYPE" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="GISKEY" ColumnName="GISKEY" />
+                <ScalarProperty Name="TOWNSHIP" ColumnName="TOWNSHIP" />
+                <ScalarProperty Name="RESPONSE_TIME" ColumnName="RESPONSE_TIME" />
+                <ScalarProperty Name="Cntrl_num" ColumnName="Cntrl_num" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Fault" ColumnName="Fault" />
+                <ScalarProperty Name="Township1" ColumnName="Township1" />
+                <ScalarProperty Name="Stand" ColumnName="Stand" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Street_No" ColumnName="Street_No" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Recieved_HD" ColumnName="Recieved_HD" />
+                <ScalarProperty Name="Receive_DateT" ColumnName="Receive_DateT" />
+                <ScalarProperty Name="Start_DateT" ColumnName="Start_DateT" />
+                <ScalarProperty Name="Delay_DateT" ColumnName="Delay_DateT" />
+                <ScalarProperty Name="Completed_DateT" ColumnName="Completed_DateT" />
+                <ScalarProperty Name="Escalation_Time" ColumnName="Escalation_Time" />
+                <ScalarProperty Name="Assigned_unit_Mac" ColumnName="Assigned_unit_Mac" />
+                <ScalarProperty Name="Completed_Desc" ColumnName="Completed_Desc" />
+                <ScalarProperty Name="Delayed_Desc" ColumnName="Delayed_Desc" />
+                <ScalarProperty Name="Revison" ColumnName="Revison" />
+                <ScalarProperty Name="Data_Changed" ColumnName="Data_Changed" />
+                <ScalarProperty Name="Client_Mun" ColumnName="Client_Mun" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetUserByEmailPassword" FunctionName="WMSModel.Store.spGetUserByEmailPassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WMSModel.spGetUserByEmailPassword_Result">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Security_Level" ColumnName="Security_Level" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
