@@ -11,12 +11,12 @@ var AppRouter = Backbone.Router.extend({
 
   UpdateTask: function(task){
     sessionStorage.setItem("task", task);
-  }
+  },
 
   DeleteTask: function(task){
     $.ajax({
       method: "DELETE",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task,
+      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task +"/",
       headers: {
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
@@ -29,7 +29,7 @@ var AppRouter = Backbone.Router.extend({
         //handle error.
       }
     });
-  }
+  },
 
   AddTask: function(project){
     sessionStorage.setItem("projectid", project);
@@ -39,9 +39,10 @@ var AppRouter = Backbone.Router.extend({
 
   DeleteProject: function(project){
     //delete the project
+    alert(project.substr(1));
     $.ajax({
       method: "DELETE",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project,
+      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
       headers: {
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
@@ -52,6 +53,7 @@ var AppRouter = Backbone.Router.extend({
       },
       error: function(data){
         //handle error.
+        console.log(data);
       }
     });
   },
