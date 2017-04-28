@@ -114,7 +114,7 @@ var AppRouter = Backbone.Router.extend({
       success: function(data){
         var tasks = new app.task(data);
         sessionStorage.setItem("Tasks", JSON.stringify(tasks["attributes"]));
-
+        console.log(tasks["attributes"]);
         var viewTasks = new app.TaskView({
           collection: tasks
         });
