@@ -21,7 +21,6 @@ app.ProjectView = Backbone.View.extend({
     var getProjects = JSON.parse(sessionStorage.getItem("Projects"));
     console.log(getProjects);
     for (var count = 0; count < Object.keys(getProjects).length; count++){
-      console.log(getProjects[count].pk);
       string += "<tr><td>" + getProjects[count].title +"</td><td>" + getProjects[count].description + "</td><td>" + getProjects[count].start_date +"</td><td>" + getProjects[count].end_date +"</td><td>" +
       getProjects[count].is_billable +"</td><td>" + getProjects[count].is_active +
       "</td><td><a href='#/projectAddTask/:"+ getProjects[count].pk +"'>Add Task</a><a href='#/projectDelete/:"+ getProjects[count].pk +"'>Delete</a><a href='#/projectUpdate/:"+JSON.stringify({"title": getProjects[count].title, "title": getProjects[count].title,"description": getProjects[count].description,"start_date": getProjects[count].start_date,"end_date": getProjects[count].end_date,"is_billable": getProjects[count].is_billable,

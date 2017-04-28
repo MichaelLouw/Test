@@ -1,6 +1,6 @@
-var task = {};
+var app = app || {}
 
-task.TaskView = Backbone.View.extend({
+app.TaskView = Backbone.View.extend({
   // tagName: 'tr',
   //
   // initialize: function(options){

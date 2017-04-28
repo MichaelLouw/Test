@@ -97,11 +97,11 @@ var AppRouter = Backbone.Router.extend({
            collection: projects
         });
         $("#project").html(viewProjects.render().el);
-        alert(data);
+        console.log(data);
       },
       error: function(data){
         //handle error.
-        alert(data);
+        console.log(data);
       }
     });
 
@@ -122,7 +122,7 @@ var AppRouter = Backbone.Router.extend({
       },
       error: function(data){
         //handle error.
-        alert(data);
+        console.log(data);
       }
     });
   },
