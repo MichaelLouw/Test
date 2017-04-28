@@ -33,11 +33,10 @@ var LoginView = Backbone.View.extend({
       success: function(data){
           sessionStorage.setItem("Token", data.token);
           window.location.replace("main.html");
-          alert(sessionStorage.getItem("Token"));
       },
       error: function(data){
-          alert(JSON.stringify(data));
           //handle error give feedback.
+          $.notify("Error logging in", "error");
       }
     })
     return false;
