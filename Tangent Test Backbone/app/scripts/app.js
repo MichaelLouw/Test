@@ -19,7 +19,9 @@ var AppRouter = Backbone.Router.extend({
 
   UpdateTask: function(task){
     sessionStorage.setItem("task", task);
-    var updatetask = new app.UpdateTask({});
+    var updatetask = new app.UpdateTask({
+      collection: task
+    });
     $("#mainContainer").html(updatetask.render().el);
   },
 

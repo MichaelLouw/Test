@@ -4,7 +4,7 @@ app.UpdateTask = Backbone.View.extend({
   // initialize: function(options){
   //   this.theproject = options;
   // },
-  template: $("#updatetask").html(),
+  template: _.template($("#updatetask").html()),
 
   events: {
     'click #btnUpdateTask': "UpdateTask"
@@ -18,7 +18,7 @@ app.UpdateTask = Backbone.View.extend({
     // var project = sessionStorage.getItem("project");
     //
     //     this.$el.html(UpdateProjectView);
-    this.$el.html($("#updatetask").html());
+    this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
 
@@ -36,7 +36,7 @@ app.UpdateTask = Backbone.View.extend({
       processData: false,
       success: function(data){
         $.notify("Task updated", "success");
-        window.location.replace("#/main");
+        window.location.replace("");
       },
       error: function(data){
         //handle error.
