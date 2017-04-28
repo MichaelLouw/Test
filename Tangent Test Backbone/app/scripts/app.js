@@ -2,7 +2,7 @@ var app = app || {};
 
 var AppRouter = Backbone.Router.extend({
   routes:{
-    "main": "LoadAll",
+    "": "LoadAll",
     "login": "login",
     "projectaddproject": "AddProject",
     "projectAddTask/:project": "AddTask",
@@ -69,20 +69,13 @@ var AppRouter = Backbone.Router.extend({
   },
 
   UpdateProject: function(project){
+      alert(JSON.stringify(project));
       sessionStorage.setItem("project", project);
       var updateproject = new app.UpdateProject({});
       $("#mainContainer").html(updateproject.render().el);
   },
 
   LoadAll: function(){
-    var viewProjects = new app.ProjectView({
-      collection: {}
-    });
-    $("#project").html(viewProjects.render().el);
-    var viewTasks = new app.TaskView({
-      collection: {}
-    });
-    $("#task").html(viewTasks.render().el);
     //get all data from projects and tasks.
     $.ajax({
       method: "GET",
@@ -91,7 +84,7 @@ var AppRouter = Backbone.Router.extend({
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
       success: function(data){
-        var projects = new models.project(data);
+        var projects = new app.project(data);
         sessionStorage.setItem("Projects", JSON.stringify(projects["attributes"]));
         // console.log(Object.keys(projects).length);
         // for (var i = 0; i < Object.keys(projects).length; i++){
@@ -129,6 +122,7 @@ var AppRouter = Backbone.Router.extend({
       },
       error: function(data){
         //handle error.
+        alert(data);
       }
     });
   },

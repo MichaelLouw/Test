@@ -45,7 +45,7 @@ app.AddTask = Backbone.View.extend({
     //         "</div>"+
     //     "</div>";
 
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html($("#addtask").html());
 
     //this.$el.html(AddTaskPage);
     return this;
@@ -54,18 +54,18 @@ app.AddTask = Backbone.View.extend({
   SaveNewTask: function(){
     //post new task to api.
     $.ajax({
-      contentType: "application/json",
       method: "POST",
+      contentType: "application/json",
       url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/",
       headers:{
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
-      data: JSON.stringify({"title": $("#title").val(), "due_date": $("#duedate").val(), "estimated_hours": $("#estimatedhours").val(), "project": sessionStorage.getItem("projectid")}),
+      data: JSON.stringify({"title": $("#title").val(), "due_date": $("#duedate").val(), "estimated_hours": $("#estimatedhours").val(), "project": sessionStorage.getItem("projectid").substr(1)}),
       processData: false,
       success: function(data){
         console.log(data);
         $.notify("New Task Added", "success");
-        window.location.replace("#/main");
+        window.location.replace("");
       },
       error: function(data){
         //handle error.
