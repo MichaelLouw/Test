@@ -37,7 +37,7 @@ app.newProject = Backbone.View.extend({
       data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}),
       success: function(data){
         $.notify("New Project Saved", "success");
-        window.location.replace("#/main");
+        window.location.replace("");
       },
       error: function(data){
         //handle error.

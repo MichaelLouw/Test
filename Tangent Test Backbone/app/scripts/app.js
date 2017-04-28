@@ -49,7 +49,6 @@ var AppRouter = Backbone.Router.extend({
 
   DeleteProject: function(project){
     //delete the project
-    alert(project.substr(1));
     $.ajax({
       method: "DELETE",
       url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
