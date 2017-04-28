@@ -13,7 +13,7 @@ app.UpdateProject = Backbone.View.extend({
   },
 
   initialize: function(){
-    this.template: _.template($("#updateproject").html());
+    this.template = _.template($("#updateproject").html());
   },
 
   render: function(){
@@ -27,15 +27,15 @@ app.UpdateProject = Backbone.View.extend({
 
   UpdateProject: function(){
     //post new task to api.
-    var project = sessionStorage.getItem("project");
+    var project = JSON.parse(sessionStorage.getItem("project"));
     $.ajax({
       method: "PATCH",
       contentType: "application/json",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.pk.substr(1) + "/",
+      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.pk + "/",
       headers:{
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
-      data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable").val(),"is_active": $("#is_active").val()}),
+      data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}),
       processData: false,
       success: function(data){
         $.notify("Project updated", "success");

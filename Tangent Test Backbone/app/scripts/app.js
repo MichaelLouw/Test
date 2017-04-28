@@ -25,7 +25,6 @@ var AppRouter = Backbone.Router.extend({
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
       success: function(data){
-        jQuery(document).ready(function(){
           console.log(data);
           var task = new app.task(data);
           sessionStorage.setItem("task", JSON.stringify(data));
@@ -35,7 +34,6 @@ var AppRouter = Backbone.Router.extend({
             model: collectionTask
           });
           $("#mainContainer").html(updatetask.render().el);
-        });
       },
       error: function(data){
         console.log(data);
@@ -91,8 +89,7 @@ var AppRouter = Backbone.Router.extend({
   },
 
   UpdateProject: function(project){
-      sessionStorage.setItem("project", project.substr(1));
-
+      console.log(project.substr(1));
       $.ajax({
         method: "GET",
         url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
@@ -100,8 +97,11 @@ var AppRouter = Backbone.Router.extend({
           "Authorization": "Token " + sessionStorage.getItem("Token")
         },
         success: function(data){
+          var project = new app.project(data);
+          sessionStorage.setItem("project", JSON.stringify(data));
+          var collectionProject = new app.Projects([project]);
           var updateproject = new app.UpdateProject({
-            collection: data
+            model: collectionProject
           });
           $("#mainContainer").html(updateproject.render().el);
         },
