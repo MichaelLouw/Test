@@ -1,29 +1,29 @@
-var models = {};
+var app = app || {};
 
 //login
-models.login = Backbone.Model.extend({
+app.login = Backbone.Model.extend({
 
 });
 
-models.logincredentials = Backbone.Collection.extend({
-  model: models.login
+app.logincredentials = Backbone.Collection.extend({
+  model: app.login
 });
 
 //projects
-models.project = Backbone.Model.extend({
+app.project = Backbone.Model.extend({
     //do data validation.
 });
 
-models.Projects = Backbone.Collection.extend({
-  model: models.project
+app.Projects = Backbone.Collection.extend({
+  model: app.project
 });
 
 
 //tasks
-models.task = Backbone.Model.extend({
+app.task = Backbone.Model.extend({
   //do data validation
 });
 
-models.Tasks = Backbone.Collection.extend({
-  model: models.task
+app.Tasks = Backbone.Collection.extend({
+  model: app.task
 })

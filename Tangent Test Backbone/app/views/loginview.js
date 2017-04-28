@@ -38,10 +38,11 @@ var LoginView = Backbone.View.extend({
       error: function(data){
           alert(JSON.stringify(data));
           //handle error give feedback.
+          window.location.replace("main.html#/main");
       }
     })
     return false;
   }
 });
 
-window.LoginView = new LoginView({model: new models.login() });
+window.LoginView = new LoginView({model: new app.login() });

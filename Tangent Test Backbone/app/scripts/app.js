@@ -1,7 +1,10 @@
+var app = app || {};
+
 var AppRouter = Backbone.Router.extend({
   routes:{
-    "": "LoadAll",
+    "main": "LoadAll",
     "login": "login",
+    "projectaddproject": "AddProject",
     "projectAddTask/:project": "AddTask",
     "projectDelete/:project": "DeleteProject",
     "projectUpdate/:project": "UpdateProject",
@@ -9,20 +12,27 @@ var AppRouter = Backbone.Router.extend({
     "taskDelete/:task": "DeleteTask"
   },
 
+  AddProject: function(){
+    var addnewproject = new app.newProject({});
+    $("#mainContainer").html(addnewproject.render().el);
+  },
+
   UpdateTask: function(task){
     sessionStorage.setItem("task", task);
+    var updatetask = new app.UpdateTask({});
+    $("#mainContainer").html(updatetask.render().el);
   },
 
   DeleteTask: function(task){
     $.ajax({
       method: "DELETE",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task +"/",
+      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.substr(1) +"/",
       headers: {
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
       success: function(data){
         //notify the user and reload the views.
-        $.notify("Project Deleted");
+        $.notify("Project Deleted", "success");
         window.location.replace("main.html");
       },
       error: function(data){
@@ -33,7 +43,7 @@ var AppRouter = Backbone.Router.extend({
 
   AddTask: function(project){
     sessionStorage.setItem("projectid", project);
-    var addtasktoproject = new AddTaskView.AddTask({});
+    var addtasktoproject = new app.AddTask({});
     $("#mainContainer").html(addtasktoproject.render().el);
   },
 
@@ -60,11 +70,19 @@ var AppRouter = Backbone.Router.extend({
 
   UpdateProject: function(project){
       sessionStorage.setItem("project", project);
-      var updateproject = new UpdateProjectView.UpdateProject({});
+      var updateproject = new app.UpdateProject({});
       $("#mainContainer").html(updateproject.render().el);
   },
 
   LoadAll: function(){
+    var viewProjects = new app.ProjectView({
+      collection: {}
+    });
+    $("#project").html(viewProjects.render().el);
+    var viewTasks = new app.TaskView({
+      collection: {}
+    });
+    $("#task").html(viewTasks.render().el);
     //get all data from projects and tasks.
     $.ajax({
       method: "GET",
@@ -82,7 +100,7 @@ var AppRouter = Backbone.Router.extend({
         //     console.log(JSON.stringify(name));
         //   }
         // }
-        var viewProjects = new project.ProjectView({
+        var viewProjects = new app.ProjectView({
            collection: projects
         });
         $("#project").html(viewProjects.render().el);
@@ -101,10 +119,10 @@ var AppRouter = Backbone.Router.extend({
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
       success: function(data){
-        var tasks = new models.task(data);
+        var tasks = new app.task(data);
         sessionStorage.setItem("Tasks", JSON.stringify(tasks["attributes"]));
 
-        var viewTasks = new task.TaskView({
+        var viewTasks = new app.TaskView({
           collection: tasks
         });
         $("#task").html(viewTasks.render().el);

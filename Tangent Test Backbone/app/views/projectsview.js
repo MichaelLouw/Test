@@ -1,6 +1,6 @@
-var project = {};
+var app = app || {};
 
-project.ProjectView = Backbone.View.extend({
+app.ProjectView = Backbone.View.extend({
   //tagName: 'tr',
 
   //render: function(){
