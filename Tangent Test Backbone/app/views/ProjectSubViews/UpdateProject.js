@@ -20,8 +20,9 @@ app.UpdateProject = Backbone.View.extend({
     // var project = sessionStorage.getItem("project");
     //
     //     this.$el.html(UpdateProjectView);
-    console.log(JSON.stringify(this.model));
-    this.$el.append(this.$el.html(this.template({project: JSON.stringify(this.model)})));
+    var string = JSON.stringify(this.model);
+    var object = JSON.parse(string);
+    this.$el.append(this.$el.html(this.template({title: object[0].title, description: object[0].description,startdate: object[0].start_date,enddate: object[0].end_date,isbillable: object[0].is_billable,isactive: object[0].is_active})));
     return this;
   },
 

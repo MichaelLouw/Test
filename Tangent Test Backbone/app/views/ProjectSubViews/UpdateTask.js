@@ -18,8 +18,9 @@ app.UpdateTask = Backbone.View.extend({
   },
 
   render: function(){
-    console.log(JSON.stringify(this.model));
-    this.$el.append(this.$el.html(this.template({task: JSON.stringify(this.model)})));
+    var string = JSON.stringify(this.model);
+    var object = JSON.parse(string);
+    this.$el.append(this.$el.html(this.template({title: object[0].title, duedate: object[0].due_date, estimatedhours: object[0].estimated_hours})));
     return this;
   },
 
