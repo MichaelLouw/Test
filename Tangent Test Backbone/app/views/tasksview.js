@@ -14,7 +14,7 @@ app.TaskView = Backbone.View.extend({
   //
   //   //add table columns
   //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Title') + '</tr>'));
-  //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Due Date') + '</tr>'));
+  //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Due_Date') + '</tr>'));
   //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Estimated Hours') + '</tr>'));
   //
   //   return this;

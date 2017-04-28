@@ -18,11 +18,29 @@ var AppRouter = Backbone.Router.extend({
   },
 
   UpdateTask: function(task){
-    sessionStorage.setItem("task", task);
-    var updatetask = new app.UpdateTask({
-      collection: task
+    $.ajax({
+      method: "GET",
+      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.substr(1) + "/",
+      headers: {
+        "Authorization": "Token " + sessionStorage.getItem("Token")
+      },
+      success: function(data){
+        jQuery(document).ready(function(){
+          console.log(data);
+          var task = new app.task(data);
+          sessionStorage.setItem("task", JSON.stringify(data));
+          console.log(task);
+          var collectionTask = new app.Tasks([task]);
+          var updatetask = new app.UpdateTask({
+            model: collectionTask
+          });
+          $("#mainContainer").html(updatetask.render().el);
+        });
+      },
+      error: function(data){
+        console.log(data);
+      }
     });
-    $("#mainContainer").html(updatetask.render().el);
   },
 
   DeleteTask: function(task){
@@ -34,11 +52,13 @@ var AppRouter = Backbone.Router.extend({
       },
       success: function(data){
         //notify the user and reload the views.
-        $.notify("Project Deleted", "success");
         window.location.replace("main.html");
+        $.notify("Project Deleted", "success");
       },
       error: function(data){
         //handle error.
+        console.log(data);
+        $.notify("Error deleting task");
       }
     });
   },
@@ -59,21 +79,36 @@ var AppRouter = Backbone.Router.extend({
       },
       success: function(data){
         //notify the user and reload the views.
-        $.notify("Project Deleted");
         window.location.replace("main.html");
+        $.notify("Project Deleted");
       },
       error: function(data){
         //handle error.
         console.log(data);
+        $.notify("Error deleting project");
       }
     });
   },
 
   UpdateProject: function(project){
-      alert(JSON.stringify(project));
-      sessionStorage.setItem("project", project);
-      var updateproject = new app.UpdateProject({});
-      $("#mainContainer").html(updateproject.render().el);
+      sessionStorage.setItem("project", project.substr(1));
+
+      $.ajax({
+        method: "GET",
+        url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
+        headers: {
+          "Authorization": "Token " + sessionStorage.getItem("Token")
+        },
+        success: function(data){
+          var updateproject = new app.UpdateProject({
+            collection: data
+          });
+          $("#mainContainer").html(updateproject.render().el);
+        },
+        error: function(data){
+          console.log(data);
+        }
+      });
   },
 
   LoadAll: function(){

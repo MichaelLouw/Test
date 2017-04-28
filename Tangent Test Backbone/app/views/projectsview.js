@@ -23,8 +23,7 @@ app.ProjectView = Backbone.View.extend({
     for (var count = 0; count < Object.keys(getProjects).length; count++){
       string += "<tr><td>" + getProjects[count].title +"</td><td>" + getProjects[count].description + "</td><td>" + getProjects[count].start_date +"</td><td>" + getProjects[count].end_date +"</td><td>" +
       getProjects[count].is_billable +"</td><td>" + getProjects[count].is_active +
-      "</td><td><a href='#/projectAddTask/:"+ getProjects[count].pk +"'><button>Add Task</button></a><a href='#/projectDelete/:"+ getProjects[count].pk +"'><button>Delete</button></a><a href='#/projectUpdate/:"+JSON.stringify({"title": getProjects[count].title, "title": getProjects[count].title,"description": getProjects[count].description,"start_date": getProjects[count].start_date,"end_date": getProjects[count].end_date,"is_billable": getProjects[count].is_billable,
-      "is_active": getProjects[count].is_active }) +"'><button>Update</button></a></td></tr>";
+      "</td><td><a href='#/projectAddTask/:"+ getProjects[count].pk +"'><button>Add Task</button></a><a href='#/projectDelete/:"+ getProjects[count].pk +"'><button>Delete</button></a><a href='#/projectUpdate/:"+ getProjects[count].pk +"'><button>Update</button></a></td></tr>";
     };
     string += "</tbody></table>"
     this.$el.html(string);

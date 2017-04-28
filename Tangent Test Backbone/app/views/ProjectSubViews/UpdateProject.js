@@ -4,21 +4,24 @@ app.UpdateProject = Backbone.View.extend({
   // initialize: function(options){
   //   this.theproject = options;
   // },
-  template: $("#updateproject").html(),
+  model: project,
+  tagName: 'div',
+  template: '',
 
   events: {
     'click #btnUpdateProject': "UpdateProject"
   },
 
   initialize: function(){
-    this.render();
+    this.template: _.template($("#updateproject").html());
   },
 
   render: function(){
     // var project = sessionStorage.getItem("project");
     //
     //     this.$el.html(UpdateProjectView);
-    this.$el.html($("#updateproject").html());
+    console.log(JSON.stringify(this.model));
+    this.$el.append(this.$el.html(this.template({project: JSON.stringify(this.model)})));
     return this;
   },
 
@@ -32,7 +35,7 @@ app.UpdateProject = Backbone.View.extend({
       headers:{
         "Authorization": "Token " + sessionStorage.getItem("Token")
       },
-      data: JSON.stringify({"title": project.title, "description": project.description,"start_date": project.start_date,"end_date": project.end_date,"is_billable": project.is_billable,"is_active": project.is_active}),
+      data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable").val(),"is_active": $("#is_active").val()}),
       processData: false,
       success: function(data){
         $.notify("Project updated", "success");

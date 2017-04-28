@@ -1,4 +1,4 @@
-***Readme instruction***
+***Readme instructions***
 
 1. Open Node.js CMD window.
 2. Navigate to project folder(Tangent Test Backbone).
