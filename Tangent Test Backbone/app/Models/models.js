@@ -12,6 +12,7 @@ app.logincredentials = Backbone.Collection.extend({
 //projects
 app.project = Backbone.Model.extend({
     //do data validation.
+    urlRoot: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/"
 });
 
 app.Projects = Backbone.Collection.extend({
@@ -22,8 +23,9 @@ app.Projects = Backbone.Collection.extend({
 //tasks
 app.task = Backbone.Model.extend({
   //do data validation
+  urlRoot: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/"
 });
 
 app.Tasks = Backbone.Collection.extend({
   model: app.task
-})
+});

@@ -113,60 +113,89 @@ var AppRouter = Backbone.Router.extend({
 
   LoadAll: function(){
     //get all data from projects and tasks.
-    $.ajax({
-      method: "GET",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/",
-      headers: {
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      success: function(data){
-        var projects = new app.project(data);
-        sessionStorage.setItem("Projects", JSON.stringify(projects["attributes"]));
-        // console.log(Object.keys(projects).length);
-        // for (var i = 0; i < Object.keys(projects).length; i++){
-        //   console.log(projects["attributes"][0]["pk"]);
-        //   for (var name in projects){
-        //     console.log(JSON.stringify(name));
-        //   }
-        // }
-        var viewProjects = new app.ProjectView({
-           collection: projects
-        });
-        $("#project").html(viewProjects.render().el);
-        console.log(data);
-      },
-      error: function(data){
-        //handle error.
-        console.log(data);
-      }
+    // $.ajax({
+    //   method: "GET",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/",
+    //   headers: {
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   success: function(data){
+    //     var projects = new app.project(data);
+    //     sessionStorage.setItem("Projects", JSON.stringify(projects["attributes"]));
+    //     // console.log(Object.keys(projects).length);
+    //     // for (var i = 0; i < Object.keys(projects).length; i++){
+    //     //   console.log(projects["attributes"][0]["pk"]);
+    //     //   for (var name in projects){
+    //     //     console.log(JSON.stringify(name));
+    //     //   }
+    //     // }
+    //     var viewProjects = new app.ProjectView({
+    //        collection: projects
+    //     });
+    //     $("#project").html(viewProjects.render().el);
+    //     console.log(data);
+    //   },
+    //   error: function(data){
+    //     //handle error.
+    //     console.log(data);
+    //   }
+    // });
+    var projectTest = new app.project();
+    projectTest.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
+      projectData = data;
+
+      //create view.
+      var viewProjects = new app.ProjectView({
+         collection: projectData
+      });
+      $("#project").html(viewProjects.render().el);
+    }, function(error){
+      $.notify("Error downloading projects", "error");
+
     });
 
-    $.ajax({
-      method: "GET",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/",
-      headers: {
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      success: function(data){
-        var tasks = new app.task(data);
-        sessionStorage.setItem("Tasks", JSON.stringify(tasks["attributes"]));
-        console.log(tasks["attributes"]);
-        var viewTasks = new app.TaskView({
-          collection: tasks
-        });
-        $("#task").html(viewTasks.render().el);
-      },
-      error: function(data){
-        //handle error.
-        console.log(data);
-      }
+    // $.ajax({
+    //   method: "GET",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/",
+    //   headers: {
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   success: function(data){
+    //     var tasks = new app.task(data);
+    //     sessionStorage.setItem("Tasks", JSON.stringify(tasks["attributes"]));
+    //     console.log(tasks["attributes"]);
+    //     var viewTasks = new app.TaskView({
+    //       collection: tasks
+    //     });
+    //     $("#task").html(viewTasks.render().el);
+    //   },
+    //   error: function(data){
+    //     //handle error.
+    //     console.log(data);
+    //   }
+    // });
+    var taskTest = new app.task();
+    taskTest.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
+      Taskdata = data;
+
+      //create view
+      var viewTasks = new app.TaskView({
+        collection: Taskdata
+      });
+      $("#task").html(viewTasks.render().el);
+
+    }, function(error){
+      $.notify("Error downloading tasks", "error");
     });
+
+
   },
 
   login: function(){
     window.LoginView = new LoginView({model: new login()});
   }
 });
+
 
 jQuery(document).ready(function(){
   var app = new AppRouter();
