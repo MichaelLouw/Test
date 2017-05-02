@@ -18,47 +18,66 @@ var AppRouter = Backbone.Router.extend({
   },
 
   UpdateTask: function(task){
-    $.ajax({
-      method: "GET",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.substr(1) + "/",
-      headers: {
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      success: function(data){
-          console.log(data);
-          var task = new app.task(data);
-          sessionStorage.setItem("task", JSON.stringify(data));
-          console.log(task);
-          var collectionTask = new app.Tasks([task]);
-          var updatetask = new app.UpdateTask({
-            model: collectionTask
-          });
-          $("#mainContainer").html(updatetask.render().el);
-      },
-      error: function(data){
-        console.log(data);
-      }
+    var taskupdate = new app.task({id:  task.substr(1) + "/" });
+
+    taskupdate.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
+      console.log(data);
+      tskData = data;
+      var updatetask = new app.UpdateTask({
+        collection: tskData
+      });
+      $("#mainContainer").html(updatetask.render().el);
+    }, function(error){
+      $.notify("erro occured", "error");
     });
+    // $.ajax({
+    //   method: "GET",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.substr(1) + "/",
+    //   headers: {
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   success: function(data){
+    //       console.log(data);
+    //       var task = new app.task(data);
+    //       sessionStorage.setItem("task", JSON.stringify(data));
+    //       console.log(task);
+    //       var collectionTask = new app.Tasks([task]);
+    //       var updatetask = new app.UpdateTask({
+    //         model: collectionTask
+    //       });
+    //       $("#mainContainer").html(updatetask.render().el);
+    //   },
+    //   error: function(data){
+    //     console.log(data);
+    //   }
+    // });
   },
 
   DeleteTask: function(task){
-    $.ajax({
-      method: "DELETE",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.substr(1) +"/",
-      headers: {
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      success: function(data){
-        //notify the user and reload the views.
-        window.location.replace("main.html");
-        $.notify("Project Deleted", "success");
-      },
-      error: function(data){
-        //handle error.
-        console.log(data);
-        $.notify("Error deleting task");
-      }
-    });
+    var deletetask = new app.task({id: task.substr(1) + "/"});
+    deletetask.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "DELETE", success: function(data){
+      console.log(data);
+      window.location.replace("main.html");
+    }, error: function(data){
+      $.notify("error occured", "error");
+    }});
+    // $.ajax({
+    //   method: "DELETE",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.substr(1) +"/",
+    //   headers: {
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   success: function(data){
+    //     //notify the user and reload the views.
+    //     window.location.replace("main.html");
+    //     $.notify("Project Deleted", "success");
+    //   },
+    //   error: function(data){
+    //     //handle error.
+    //     console.log(data);
+    //     $.notify("Error deleting task");
+    //   }
+    // });
   },
 
   AddTask: function(project){
@@ -69,46 +88,64 @@ var AppRouter = Backbone.Router.extend({
 
   DeleteProject: function(project){
     //delete the project
-    $.ajax({
-      method: "DELETE",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
-      headers: {
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      success: function(data){
-        //notify the user and reload the views.
-        window.location.replace("main.html");
-        $.notify("Project Deleted");
-      },
-      error: function(data){
-        //handle error.
-        console.log(data);
-        $.notify("Error deleting project");
-      }
-    });
+    var deleteproj = new app.project({pk: project.substr(1) + "/"});
+    deleteproj.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "DELETE", success: function(data){
+      console.log(data);
+      window.location.replace("main.html");
+    }, error: function(data){
+      $.notify("error occured", "error");
+    }});
+    // $.ajax({
+    //   method: "DELETE",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
+    //   headers: {
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   success: function(data){
+    //     //notify the user and reload the views.
+    //     window.location.replace("main.html");
+    //     $.notify("Project Deleted");
+    //   },
+    //   error: function(data){
+    //     //handle error.
+    //     console.log(data);
+    //     $.notify("Error deleting project");
+    //   }
+    // });
   },
 
   UpdateProject: function(project){
-      console.log(project.substr(1));
-      $.ajax({
-        method: "GET",
-        url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
-        headers: {
-          "Authorization": "Token " + sessionStorage.getItem("Token")
-        },
-        success: function(data){
-          var project = new app.project(data);
-          sessionStorage.setItem("project", JSON.stringify(data));
-          var collectionProject = new app.Projects([project]);
-          var updateproject = new app.UpdateProject({
-            model: collectionProject
-          });
-          $("#mainContainer").html(updateproject.render().el);
-        },
-        error: function(data){
-          console.log(data);
-        }
+      var proj = new app.project({pk:  project.substr(1) + "/" });
+
+      proj.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
+        console.log(data);
+        prjData = data;
+        var updateproject = new app.UpdateProject({
+          collection: prjData
+        });
+        $("#mainContainer").html(updateproject.render().el);
+      }, function(error){
+        $.notify("erro occured", "error");
       });
+      // $.ajax({
+      //   method: "GET",
+      //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.substr(1) + "/",
+      //   headers: {
+      //     "Authorization": "Token " + sessionStorage.getItem("Token")
+      //   },
+      //   success: function(data){
+      //     var project = new app.project(data);
+      //     sessionStorage.setItem("project", JSON.stringify(data));
+      //     var collectionProject = new app.Projects([project]);
+      //     var updateproject = new app.UpdateProject({
+      //       model: collectionProject
+      //     });
+      //     $("#mainContainer").html(updateproject.render().el);
+      //   },
+      //   error: function(data){
+      //     console.log(data);
+      //   }
+      // });
   },
 
   LoadAll: function(){

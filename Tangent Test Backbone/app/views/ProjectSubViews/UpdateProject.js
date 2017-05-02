@@ -20,32 +20,44 @@ app.UpdateProject = Backbone.View.extend({
     // var project = sessionStorage.getItem("project");
     //
     //     this.$el.html(UpdateProjectView);
-    var string = JSON.stringify(this.model);
+    var string = JSON.stringify(this.collection);
     var object = JSON.parse(string);
-    this.$el.append(this.$el.html(this.template({title: object[0].title, description: object[0].description,startdate: object[0].start_date,enddate: object[0].end_date,isbillable: object[0].is_billable,isactive: object[0].is_active})));
+    console.log(string);
+    this.$el.append(this.$el.html(this.template({title: object.title, description: object.description,startdate: object.start_date,enddate: object.end_date,isbillable: object.is_billable,isactive: object.is_active})));
     return this;
   },
 
   UpdateProject: function(){
     //post new task to api.
-    var project = JSON.parse(sessionStorage.getItem("project"));
-    $.ajax({
-      method: "PATCH",
-      contentType: "application/json",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.pk + "/",
-      headers:{
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}),
-      processData: false,
-      success: function(data){
-        $.notify("Project updated", "success");
-        window.location.replace("#/main");
-      },
-      error: function(data){
-        //handle error.
-        $.notify("error updating project", "error");
-      }
-    });
+    //var project = JSON.parse(sessionStorage.getItem("project"));
+    console.log(this.collection.pk);
+    var proj = new app.project({pk: this.collection.pk + "/"});
+    proj.fetch({data: {"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),
+    "is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}, type: "PATCH", headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, 
+    success: function(data){
+      console.log(data);
+    },
+    error: function(data){
+      $.notify("error occured", "error");
+    }
+  });
+    // $.ajax({
+    //   method: "PATCH",
+    //   contentType: "application/json",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.pk + "/",
+    //   headers:{
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}),
+    //   processData: false,
+    //   success: function(data){
+    //     $.notify("Project updated", "success");
+    //     window.location.replace("#/main");
+    //   },
+    //   error: function(data){
+    //     //handle error.
+    //     $.notify("error updating project", "error");
+    //   }
+    // });
   }
 });

@@ -53,25 +53,37 @@ app.AddTask = Backbone.View.extend({
 
   SaveNewTask: function(){
     //post new task to api.
-    $.ajax({
-      method: "POST",
-      contentType: "application/json",
-      url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/",
-      headers:{
-        "Authorization": "Token " + sessionStorage.getItem("Token")
-      },
-      data: JSON.stringify({"title": $("#title").val(), "due_date": $("#duedate").val(), "estimated_hours": $("#estimatedhours").val(), "project": sessionStorage.getItem("projectid").substr(1)}),
-      processData: false,
-      success: function(data){
-        console.log(data);
-        $.notify("New Task Added", "success");
-        window.location.replace("");
-      },
-      error: function(data){
-        //handle error.
-        console.log(data);
-        $.notify("Error Adding Task", "error");
-      }
-    });
+    var task = new app.task();
+    task.fetch({data: {"title": $("#title").val(), "due_date": $("#duedate").val(), "estimated_hours": $("#estimatedhours").val(), "project": sessionStorage.getItem("projectid").substr(1)}, type: "POST",
+    headers: {"Authorization": "Token " + sessionStorage.getItem("Token")},
+    success: function(data){
+      console.log(data);
+      $.notify("New Project Saved", "success");
+      window.location.replace("");
+    },
+    error: function(data){
+      $.notify("error occured", "error");
+    }
+  });
+    // $.ajax({
+    //   method: "POST",
+    //   contentType: "application/json",
+    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/",
+    //   headers:{
+    //     "Authorization": "Token " + sessionStorage.getItem("Token")
+    //   },
+    //   data: JSON.stringify({"title": $("#title").val(), "due_date": $("#duedate").val(), "estimated_hours": $("#estimatedhours").val(), "project": sessionStorage.getItem("projectid").substr(1)}),
+    //   processData: false,
+    //   success: function(data){
+    //     console.log(data);
+    //     $.notify("New Task Added", "success");
+    //     window.location.replace("");
+    //   },
+    //   error: function(data){
+    //     //handle error.
+    //     console.log(data);
+    //     $.notify("Error Adding Task", "error");
+    //   }
+    // });
   }
 });
