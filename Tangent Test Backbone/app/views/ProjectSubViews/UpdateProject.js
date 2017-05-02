@@ -17,9 +17,6 @@ app.UpdateProject = Backbone.View.extend({
   },
 
   render: function(){
-    // var project = sessionStorage.getItem("project");
-    //
-    //     this.$el.html(UpdateProjectView);
     var string = JSON.stringify(this.collection);
     var object = JSON.parse(string);
     console.log(string);
@@ -33,7 +30,7 @@ app.UpdateProject = Backbone.View.extend({
     console.log(this.collection.pk);
     var proj = new app.project({pk: this.collection.pk + "/"});
     proj.fetch({data: {"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),
-    "is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}, type: "PATCH", headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, 
+    "is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}, type: "PATCH", headers: {"Authorization": "Token " + sessionStorage.getItem("Token")},
     success: function(data){
       console.log(data);
     },
@@ -41,23 +38,5 @@ app.UpdateProject = Backbone.View.extend({
       $.notify("error occured", "error");
     }
   });
-    // $.ajax({
-    //   method: "PATCH",
-    //   contentType: "application/json",
-    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.pk + "/",
-    //   headers:{
-    //     "Authorization": "Token " + sessionStorage.getItem("Token")
-    //   },
-    //   data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}),
-    //   processData: false,
-    //   success: function(data){
-    //     $.notify("Project updated", "success");
-    //     window.location.replace("#/main");
-    //   },
-    //   error: function(data){
-    //     //handle error.
-    //     $.notify("error updating project", "error");
-    //   }
-    // });
   }
 });

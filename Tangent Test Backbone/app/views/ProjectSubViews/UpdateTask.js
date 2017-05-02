@@ -5,7 +5,6 @@ app.UpdateTask = Backbone.View.extend({
   //   this.theproject = options;
   // },
 
-  model: task,
   tagName: 'div',
   tamplate: '',
 
@@ -37,26 +36,5 @@ app.UpdateTask = Backbone.View.extend({
       $.notify("error occured", "error");
     }
   });
-    // var task = JSON.parse(sessionStorage.getItem("task"));
-    // console.log(task);
-    // console.log("update: " + task.id);
-    // $.ajax({
-    //   method: "PATCH",
-    //   contentType: "application/json",
-    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.id + "/",
-    //   headers:{
-    //     "Authorization": "Token " + sessionStorage.getItem("Token")
-    //   },
-    //   data: JSON.stringify({"title": $("#title").val(), "due_date": $("#duedate").val(),"estimated_hours": $("#estimatedhours").val()}),
-    //   processData: false,
-    //   success: function(data){
-    //     $.notify("Task updated", "success");
-    //     window.location.replace("");
-    //   },
-    //   error: function(data){
-    //     //handle error.
-    //     $.notify("error updating task", "error");
-    //   }
-    // });
   }
 });

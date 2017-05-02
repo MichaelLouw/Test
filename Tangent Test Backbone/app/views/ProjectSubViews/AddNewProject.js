@@ -38,23 +38,5 @@ app.newProject = Backbone.View.extend({
       $.notify("error occured", "error");
     }
   });
-    // alert( + " " +$("#description").val() + " "+$("#start_date").val() + " "+$("#end_date").val() + " "+$("#is_billable option:selected").val() + " "+$("#is_active option:selected").val() + " ");
-    // $.ajax({
-    //   method: "POST",
-    //   contentType: "application/json",
-    //   url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/",
-    //   headers:{
-    //     "Authorization": "Token " + sessionStorage.getItem("Token")
-    //   },
-    //   data: JSON.stringify({"title": $("#title").val(), "description": $("#description").val(),"start_date": $("#start_date").val(),"end_date": $("#end_date").val(),"is_billable": $("#is_billable option:selected").val(),"is_active": $("#is_active option:selected").val()}),
-    //   success: function(data){
-    //     $.notify("New Project Saved", "success");
-    //     window.location.replace("");
-    //   },
-    //   error: function(data){
-    //     //handle error.
-    //     $.notify("error saving project", "error");
-    //   }
-    // });
   }
 });

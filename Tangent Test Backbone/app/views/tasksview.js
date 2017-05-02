@@ -1,28 +1,10 @@
 var app = app || {}
 
 app.TaskView = Backbone.View.extend({
-  // tagName: 'tr',
-  //
-  // initialize: function(options){
-  //   _.bindAll(this.$("#task"), 'render');
-  //
-  //   this.model.bind('change', this.render);
-  // },
-  //
-  // render: function(){
-  //   jQuery(this.el).empty();
-  //
-  //   //add table columns
-  //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Title') + '</tr>'));
-  //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Due_Date') + '</tr>'));
-  //   jQuery(this.el).append(jQuery('<tr>' + this.model.get('Estimated Hours') + '</tr>'));
-  //
-  //   return this;
-  // }
   render: function(){
     var string = "<table class='table table-hover table-responsive'><thead><tr><th>Title</th><th>Due Date</th><th>Estimated Hours</th><th>Actions</th></thead><tbody>";
     //var getTasks = JSON.parse(sessionStorage.getItem("Tasks"));
-    var getTasks = this.collection;
+    var getTasks = this.model.attributes;
     console.log(getTasks + Object.keys(getTasks));
     for (var i = 0; i < Object.keys(getTasks).length; i++){
       //console.log(getTasks[i].id);
@@ -34,36 +16,3 @@ app.TaskView = Backbone.View.extend({
     return this;
   }
 });
-
-// task.TaskViewBody = Backbone.View.extend({
-//   collection: null,
-//
-//   el: 'tbody',
-//
-//   initialize: function(options){
-//     this.collection = options.collection;
-//
-//     _.bindAll(this, 'render');
-//
-//     this.collection.bind('reset', this.render);
-//     this.collection.bind('add', this.render);
-//     this.collection.bind('remove', this.render);
-//     this.collection.bind('update', this.render);
-//   },
-//
-//   render: function(){
-//     var element = jQuery(this.el);
-//
-//     element.empty();
-//
-//     this.collection.forEach(function(item){
-//       var itemView = new views.TaskViewItem({
-//         taskmodel: item
-//       });
-//
-//       element.append(itemView.render().el);
-//     });
-//
-//     return this;
-//   }
-// });
