@@ -43,4 +43,4 @@ app.LoginView = Backbone.View.extend({
   }
 });
 
-window.LoginView = new LoginView({model: new app.login() });
+window.LoginView = new app.LoginView({model: new app.login() });

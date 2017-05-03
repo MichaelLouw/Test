@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="container" id="project">
-        <div class="container" id='projecttable'>
+        <script type="text-template" id="projecttblTemplate">
         <table class='table table-hover table-responsive'>
           <thead>
             <tr>
@@ -45,10 +45,10 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id='project-table-body'>
+          <tbody class='project-table-body'>
           </tbody>
         </table>
-      </div>
+        </script>
         <script type="text-template" id="trTemplate">
           <td><%= title %></td>
           <td><%= description %></td>
@@ -80,6 +80,7 @@
       </div>
 
     <div class="container" id="task">
+      <script type="text-template" id="tasktblTemplate">
       <table class='table table-hover table-responsive'>
         <thead>
           <tr>
@@ -88,16 +89,17 @@
             <th>Estimated Hours</th>
           </tr>
         </thead>
-        <tbody id="taskTable-body">
+        <tbody class="task-table-body">
         </tbody>
       </table>
-      <!--<script type="text/template" id="taskTableTemplate">
+      </script>
+      <script type="text/template" id="tasktrTemplate">
         <td><%- title%></td>
         <td><%- due_date%></td>
         <td><%- estimated_hours%></td>
-        <td><button class="form-control" onclick='UpdateTask(<%- id%>); return false;' id="btnupdatetask">Update Task</button>
-            <button class="form-control" onclick='DeleteTask(<%- id%>); return false;' id="btndeletetask">Delete Task</button></td>
-      </script>-->
+        <td><a href="#task/update/<%- id%>" class="btn form-control" id="btnupdatetask">Update Task</a>
+            <a href="#task/delete/<%- id%>" class="btn form-control" id="btndeletetask">Delete Task</a></td>
+      </script>
     </div>
     </div>
 
@@ -133,6 +135,7 @@
 
     <script type="text/template" id="addproject">
       <div class='container'>
+        <form role="form" class="form-horizontal contract-form">
               <h1 class='form-control' style='background-color: lightblue'>Add Project</h1>
               <div class='row'>
                   <div class='col-lg-6'>
@@ -190,14 +193,18 @@
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <button id='btnAddProject' class='form-control' style='width: 50%;'>Add Project</button>
-                  <a href=""><button id='btnGoBack' class='form-control' style='width: 50%;'>Cancel</button></a>
+                  <button type='submit' id='btnGoBack' class='form-control' style='width: 50%;'>Add Project</button>
               </div>
+              <div class='row' style='padding-left: 70%;'>
+                  <a href='main.html' class='btn form-control'>Cencel</a>
+              </div>
+            </form>
         </div>
     </script>
 
     <script type="text/template" id="updateproject">
       <div class='container'>
+        <form role="form" class="form-horizontal contract-form">
               <h1 class='form-control' style='background-color: lightblue'>Add Task For Project</h1>
               <div class='row'>
                   <div class='col-lg-6'>
@@ -255,13 +262,18 @@
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <a href='main.html'><button id='btnUpdateProject' class='form-control' style='width: 50%;'>Update Project</button></a>
+                  <button type='submit' id='btnUpdateProject' class='form-control' style='width: 50%;'>Update Project</button>
               </div>
+              <div class='row' style='padding-left: 70%;'>
+                  <a href='main.html' class='btn form-control'>Cencel</a>
+              </div>
+            </form>
         </div>
     </script>
 
     <script type="text/template" id="addtask">
       <div class='container'>
+        <form role="form" class="form-horizontal contract-form">
               <h1 class='form-control' style='background-color: lightblue'>Add Task For Project</h1>
               <div class='row'>
                   <div class='col-lg-6'>
@@ -289,13 +301,18 @@
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <a><button id='btnSaveTask' class='form-control' class='savenewtask' style='width: 50%;'>Save New Task</button></a>
+                  <button type='submit' id='btnSaveTask' class='form-control' class='savenewtask' style='width: 50%;'>Save New Task</button>
               </div>
+              <div class='row' style='padding-left: 70%;'>
+                  <a href='main.html' class='btn form-control'>Cencel</a>
+              </div>
+            </form>
           </div>
     </script>
 
     <script type="text/template" id="updatetask">
       <div class='container'>
+        <form role="form" class="form-horizontal contract-form">
               <h1 class='form-control' style='background-color: lightblue'>Update task</h1>
               <div class='row'>
                   <div class='col-lg-6'>
@@ -323,8 +340,12 @@
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <a><button id='btnUpdateTask' class='form-control' class='updatetask' style='width: 50%;'>Update Task</button></a>
+                  <button type='submit' id='btnUpdateTask' class='btn form-control' class='updatetask' style='width: 100%;'>Update Task</button>
               </div>
+              <div class='row' style='padding-left: 70%;'>
+                  <a href='main.html' class='btn form-control'>Cencel</a>
+              </div>
+            </form>
           </div>
     </script>
 
