@@ -2,7 +2,7 @@ var app = app || {};
 
 app.AddTask = Backbone.View.extend({
 
-  model: AddNewTask,
+  model: app.task,
   template: $("#addtask").html(),
 
   events: {
