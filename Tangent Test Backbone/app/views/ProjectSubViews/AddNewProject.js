@@ -1,12 +1,10 @@
-var app = app || {};
-
 app.newProject = Backbone.View.extend({
   // initialize: function(options){
   //   this.theproject = options;
   // },
   model: app.project,
   tagName: 'div',
-  template: _.template($("#addproject").html()),
+  //template: _.template($("#addproject").html()),
 
   events: {
     'click #btnAddProject': "NewProject"
@@ -20,7 +18,7 @@ app.newProject = Backbone.View.extend({
     // var project = sessionStorage.getItem("project");
     //
     //     this.$el.html(UpdateProjectView);
-    this.$el.html(this.template());
+    this.$el.html($("#addproject").html());
     return this;
   },
 

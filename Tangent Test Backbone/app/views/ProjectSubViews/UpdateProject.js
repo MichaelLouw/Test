@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.UpdateProject = Backbone.View.extend({
   // initialize: function(options){
   //   this.theproject = options;

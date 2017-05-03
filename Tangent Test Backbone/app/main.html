@@ -22,17 +22,17 @@
     </div>
 
     <div class="container" id="mainContainer">
-      <div class="container">
-        <div class="col-lg-3">
-          <a href="#/projectaddproject"><button class="form-control">Add Project</button></a>
-          <br />
-        </div>
-      </div>
       <div class="row">
           <label style="background-color: lightblue" class="form-control" runat="server" Font-Size="X-Large">Projects</label>
       </div>
-
+      <div class="row">
+        <div class="col-lg-3">
+          <button class="form-control" id='btnAddProject'>Add Project</button>
+          <br />
+        </div>
+      </div>
       <div class="container" id="project">
+        <div class="container" id='projecttable'>
         <table class='table table-hover table-responsive'>
           <thead>
             <tr>
@@ -42,12 +42,26 @@
               <th>End Date</th>
               <th>Is Billable</th>
               <th>Is Active</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody id='table-body'>
+          <tbody id='project-table-body'>
           </tbody>
         </table>
-        <script type="text-template" id="projectTableTemplate">
+      </div>
+        <script type="text-template" id="trTemplate">
+          <td><%= title %></td>
+          <td><%= description %></td>
+          <td><%= start_date %></td>
+          <td><%= end_date %></td>
+          <td><%= is_billable %></td>
+          <td><%= is_active %></td>
+          <td><button class='btnAddTask'>Add Task</button>
+              <button class='btnUpdateProject'>Update Project</button>
+              <button class='btnDeleteProject'>Delete Project</button>
+          </td>
+        </script>
+        <!--<script type="text-template" id="projectTableTemplate">
           <td><%= title %></td>
           <td><%= description %></td>
           <td><%= start_date %></td>
@@ -58,7 +72,7 @@
               <button class="form-control">Update Project</button>
               <button class="form-control">Delete Project</button>
           </td>
-        </script>
+        </script>-->
       </div>
 
       <div class="row">
@@ -77,13 +91,13 @@
         <tbody id="taskTable-body">
         </tbody>
       </table>
-      <script type="text/template" id="taskTableTemplate">
+      <!--<script type="text/template" id="taskTableTemplate">
         <td><%- title%></td>
         <td><%- due_date%></td>
         <td><%- estimated_hours%></td>
         <td><button class="form-control" onclick='UpdateTask(<%- id%>); return false;' id="btnupdatetask">Update Task</button>
             <button class="form-control" onclick='DeleteTask(<%- id%>); return false;' id="btndeletetask">Delete Task</button></td>
-      </script>
+      </script>-->
     </div>
     </div>
 
@@ -106,6 +120,8 @@
     <!-- endbuild -->
 
     <!-- include app and view files -->
+    <script src="/app.js"></script>
+    <script src="/router.js"></script>
     <script src="/Models/models.js"></script>
     <script src="/views/projectsview.js"></script>
     <script src="/views/tasksview.js"></script>
@@ -113,7 +129,6 @@
     <script src="/views/ProjectSubViews/UpdateTask.js"></script>
     <script src="/views/ProjectSubViews/UpdateProject.js"></script>
     <script src="/views/ProjectSubViews/AddNewProject.js"></script>
-    <script src="/scripts/app.js"></script>
     <!-- endbuild -->
 
     <script type="text/template" id="addproject">
@@ -311,6 +326,12 @@
                   <a><button id='btnUpdateTask' class='form-control' class='updatetask' style='width: 50%;'>Update Task</button></a>
               </div>
           </div>
+    </script>
+
+    <script>
+      $(function(){
+        app.start();
+      });
     </script>
 
 </body>

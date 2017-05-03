@@ -1,4 +1,4 @@
-var LoginView = Backbone.View.extend({
+app.LoginView = Backbone.View.extend({
   el: $("#login-form"),
 
   events: {

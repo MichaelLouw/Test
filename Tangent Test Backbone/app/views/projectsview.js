@@ -1,20 +1,64 @@
-var app = app || {};
-
-app.ProjectView = Backbone.View.extend({
+app.projectItemView = Backbone.View.extend({
 
   tagName: 'tr',
 
+  template: _.template($("#trTemplate").html()),
+
   events: {
-    "click #AddTask": "AddTask",
-    "click #DeleteProject": "DeleteProject",
-    "click #UpdateProject": "UpdateProject"
+    "click .btnAddTask": "AddTask",
+    "click .btnUpdateProject": "UpdateProject",
+    "click .btnDeleteProject": "DeleteProject"
   },
 
-  initialize: function(){
+  initialize: function(options){
+    _.bindAll(this, 'render');
+
     this.listenTo(this.model, "change", this.render);
   },
 
-  template: _.template($("#projectTableTemplate").html()),
+  render: function(){
+    this.$el.html(this.template(this.model));
+
+    return this;
+  },
+
+  AddTask: function(e){
+    e.preventDefault();
+    var addtasktoproject = new app.AddTask({
+      model: this.model
+    });
+    $("#mainContainer").html(addtasktoproject.render().el);
+  },
+
+  DeleteProject: function(e){
+    alert("in");
+    //e.preventDefault();
+    this.model.destroy();
+  },
+
+  UpdateProject: function(e){
+    e.preventDefault();
+    var updateproject = new app.UpdateProject({
+      model: this.model
+    });
+    $("#mainContainer").html(updateproject.render().el);
+  }
+})
+
+app.ProjectView = Backbone.View.extend({
+
+  el: 'table',
+  collection: null,
+
+  initialize: function(){
+    this.collection = this.model;
+
+    _.bindAll(this, 'render');
+
+    this.listenTo(this.model, "change", this.render);
+  },
+
+  //template: _.template($("#projectTableTemplate").html()),
 
   render: function(){
     // var string = "<table class='table table-hover table-responsive'><thead><tr><th>Title</th><th>Description</th><th>Start Date</th><th>End Date</th><th>Is Billable</th><th>Is Active</th><th>Actions</th></thead><tbody>";
@@ -29,28 +73,17 @@ app.ProjectView = Backbone.View.extend({
     // string += "</tbody></table>"
     // this.$el.html(string);
     // return this;
-    this.$el.html(this.template(this.model.attributes));
+    var element = jQuery(this.el);
+
+    for (k in this.model.attributes){
+      console.log(k);
+      var projectView = new app.projectItemView({
+        model: this.model.attributes[k]
+      });
+
+      element.append(projectView.render().el);
+    }
     return this;
-  },
 
-  AddTask: function(e){
-    e.preventDefault();
-    var addtasktoproject = new app.AddTask({
-      model: this.model
-    });
-    $("#mainContainer").html(addtasktoproject.render().el);
-  },
-
-  DeleteProject: function(e){
-    e.preventDefault();
-    this.model.DeleteTask({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}});
-  },
-
-  UpdateProject: function(e){
-    e.preventDefault();
-    var updateproject = new app.UpdateProject({
-      model: this.model
-    });
-    $("#mainContainer").html(updateproject.render().el);
   }
 });

@@ -1,5 +1,3 @@
-var app = app || {};
-
 app.AddTask = Backbone.View.extend({
 
   model: app.task,
