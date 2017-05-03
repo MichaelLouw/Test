@@ -13,66 +13,68 @@ var AppRouter = Backbone.Router.extend({
   },
 
   AddProject: function(){
-    var addnewproject = new app.newProject({});
+    var addnewproject = new app.newProject({
+
+    });
     $("#mainContainer").html(addnewproject.render().el);
   },
 
-  UpdateTask: function(task){
-    var taskupdate = new app.task({id:  task.substr(1) + "/" });
+  // UpdateTask: function(task){
+  //   var taskupdate = new app.task({id:  task.substr(1) + "/" });
+  //
+  //   taskupdate.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
+  //     console.log(data);
+  //     tskData = data;
+  //     var updatetask = new app.UpdateTask({
+  //       collection: tskData
+  //     });
+  //     $("#mainContainer").html(updatetask.render().el);
+  //   }, function(error){
+  //     $.notify("erro occured", "error");
+  //   });
+  // },
 
-    taskupdate.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
-      console.log(data);
-      tskData = data;
-      var updatetask = new app.UpdateTask({
-        collection: tskData
-      });
-      $("#mainContainer").html(updatetask.render().el);
-    }, function(error){
-      $.notify("erro occured", "error");
-    });
-  },
+  // DeleteTask: function(task){
+  //   var deletetask = new app.task({id: task.substr(1) + "/"});
+  //   deletetask.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "DELETE", success: function(data){
+  //     console.log(data);
+  //     window.location.replace("main.html");
+  //   }, error: function(data){
+  //     $.notify("error occured", "error");
+  //   }});
+  // },
 
-  DeleteTask: function(task){
-    var deletetask = new app.task({id: task.substr(1) + "/"});
-    deletetask.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "DELETE", success: function(data){
-      console.log(data);
-      window.location.replace("main.html");
-    }, error: function(data){
-      $.notify("error occured", "error");
-    }});
-  },
+  // AddTask: function(project){
+  //   sessionStorage.setItem("projectid", project);
+  //   var addtasktoproject = new app.AddTask({});
+  //   $("#mainContainer").html(addtasktoproject.render().el);
+  // },
 
-  AddTask: function(project){
-    sessionStorage.setItem("projectid", project);
-    var addtasktoproject = new app.AddTask({});
-    $("#mainContainer").html(addtasktoproject.render().el);
-  },
+  // DeleteProject: function(project){
+  //   //delete the project
+  //   var deleteproj = new app.project({pk: project.substr(1) + "/"});
+  //   deleteproj.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "DELETE", success: function(data){
+  //     console.log(data);
+  //     window.location.replace("main.html");
+  //   }, error: function(data){
+  //     $.notify("error occured", "error");
+  //   }});
+  // },
 
-  DeleteProject: function(project){
-    //delete the project
-    var deleteproj = new app.project({pk: project.substr(1) + "/"});
-    deleteproj.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "DELETE", success: function(data){
-      console.log(data);
-      window.location.replace("main.html");
-    }, error: function(data){
-      $.notify("error occured", "error");
-    }});
-  },
-
-  UpdateProject: function(project){
-      var proj = new app.project({pk:  project.substr(1) + "/" });
-
-      proj.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
-        console.log(data);
-        prjData = data;
-        var updateproject = new app.UpdateProject({
-          collection: prjData
-        });
-        $("#mainContainer").html(updateproject.render().el);
-      }, function(error){
-        $.notify("erro occured", "error");
-      });
-  },
+  // UpdateProject: function(project){
+  //     var proj = new app.project({pk:  project.substr(1) + "/" });
+  //
+  //     proj.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(data){
+  //       console.log(data);
+  //       prjData = data;
+  //       var updateproject = new app.UpdateProject({
+  //         collection: prjData
+  //       });
+  //       $("#mainContainer").html(updateproject.render().el);
+  //     }, function(error){
+  //       $.notify("erro occured", "error");
+  //     });
+  // },
 
   LoadAll: function(){
 
@@ -81,7 +83,6 @@ var AppRouter = Backbone.Router.extend({
       projectData = data;
       //create view.
       var viewProjects = new app.ProjectView({
-         collection: projectData,
          model: projectTest
       });
       $("#project").html(viewProjects.render().el);
@@ -96,7 +97,6 @@ var AppRouter = Backbone.Router.extend({
       Taskdata = data;
       //create view
       var viewTasks = new app.TaskView({
-        collection: Taskdata,
         model: taskTest
       });
       $("#task").html(viewTasks.render().el);

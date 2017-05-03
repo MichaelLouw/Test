@@ -33,7 +33,7 @@
       </div>
 
       <div class="container" id="project">
-        <!--<table>
+        <table class='table table-hover table-responsive'>
           <thead>
             <tr>
               <th>Title</th>
@@ -44,9 +44,21 @@
               <th>Is Active</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id='table-body'>
           </tbody>
-        </table>-->
+        </table>
+        <script type="text-template" id="projectTableTemplate">
+          <td><%= title %></td>
+          <td><%= description %></td>
+          <td><%= start_date %></td>
+          <td><%= end_date %></td>
+          <td><%= is_billable %></td>
+          <td><%= is_active %></td>
+          <td><button class="form-control">Add Task</button>
+              <button class="form-control">Update Project</button>
+              <button class="form-control">Delete Project</button>
+          </td>
+        </script>
       </div>
 
       <div class="row">
@@ -54,7 +66,7 @@
       </div>
 
     <div class="container" id="task">
-      <!--<table>
+      <table class='table table-hover table-responsive'>
         <thead>
           <tr>
             <th>Title</th>
@@ -62,9 +74,16 @@
             <th>Estimated Hours</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="taskTable-body">
         </tbody>
-      </table>-->
+      </table>
+      <script type="text/template" id="taskTableTemplate">
+        <td><%- title%></td>
+        <td><%- due_date%></td>
+        <td><%- estimated_hours%></td>
+        <td><button class="form-control" onclick='UpdateTask(<%- id%>); return false;' id="btnupdatetask">Update Task</button>
+            <button class="form-control" onclick='DeleteTask(<%- id%>); return false;' id="btndeletetask">Delete Task</button></td>
+      </script>
     </div>
     </div>
 
@@ -105,7 +124,7 @@
                       <label>Title</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='title'/>
+                      <input type='text' class='form-control' id='title' value='<%= AddNewProject.title %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -113,7 +132,7 @@
                       <label>Description</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='description' />
+                      <input type='text' class='form-control' id='description' value='<%= AddNewProject.description %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -121,7 +140,7 @@
                       <label>Start Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='start_date' />
+                      <input type='date' class='form-control' id='start_date' value='<%= AddNewProject.start_date %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -129,7 +148,7 @@
                       <label>End Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='end_date'/>
+                      <input type='date' class='form-control' id='end_date' value='<%= AddNewProject.end_date %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -137,7 +156,7 @@
                       <label>Is Billable</label>
                   </div>
                   <div class='col-lg-6'>
-                      <select id='is_billable' class='form-control'>
+                      <select id='is_billable' class='form-control' value='<%= AddNewProject.is_billbale %>'>
                         <option>true</option>
                         <option>false</option>
                       </select>
@@ -148,7 +167,7 @@
                       <label>Is Active</label>
                   </div>
                   <div class='col-lg-6'>
-                    <select id='is_active' class='form-control'>
+                    <select id='is_active' class='form-control' value='<%= AddNewProject.is_active %>'>
                       <option>true</option>
                       <option>false</option>
                     </select>
