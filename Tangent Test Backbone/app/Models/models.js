@@ -16,7 +16,9 @@ app.project = Backbone.Model.extend({
 });
 
 app.Projects = Backbone.Collection.extend({
-  model: app.project
+  model: app.project,
+  url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/",
+  contentType: "application/json"
 });
 
 
@@ -29,5 +31,7 @@ app.task = Backbone.Model.extend({
 });
 
 app.Tasks = Backbone.Collection.extend({
-  model: app.task
+  model: app.task,
+  url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/",
+  contentType: "application/json"
 });
