@@ -1,5 +1,38 @@
 app.ProjectView = Backbone.View.extend({
-  
+  template: _.template($("#projecttblTemplate").html()),
+
+  renderProjectItem: function(project){
+    console.log(project);
+    var projectItemView = new app.ProjectItemView({model: project});
+    this.$(".project-table-body").append(projectItemView.render().$el);
+  },
+
+  render: function(){
+    var html = this.template();
+    this.$el.html(html);
+
+    for (k in this.collection){
+      console.log(k);
+      this.renderProjectItem(this.collection[k]);
+    }
+
+    return this;
+  }
+})
+
+app.ProjectItemView = Backbone.View.extend({
+  tagName: 'tr',
+  template: _.template($("#trTemplate").html()),
+
+  initialize: function(){
+    //this.listenTo(this.model, "change", this.render);
+  },
+
+  render: function(){
+    var html = this.template(this.model);
+    this.$el.append(html);
+    return this;
+  }
 })
 
 // app.projectItemView = Backbone.View.extend({

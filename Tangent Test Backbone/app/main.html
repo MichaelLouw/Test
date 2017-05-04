@@ -56,9 +56,9 @@
           <td><%= end_date %></td>
           <td><%= is_billable %></td>
           <td><%= is_active %></td>
-          <td><button class='btnAddTask'>Add Task</button>
-              <button class='btnUpdateProject'>Update Project</button>
-              <button class='btnDeleteProject'>Delete Project</button>
+          <td><a href="#project/newtask/<%- pk%>" class="btn form-control" id="btnupdatetask">Add Task</a>
+              <a href="#project/update/<%- pk%>" class="btn form-control" id="btnupdatetask">Update Project</a>
+              <a href="#project/delete/<%- pk%>" class="btn form-control" id="btnupdatetask">Delete Project</a>
           </td>
         </script>
         <!--<script type="text-template" id="projectTableTemplate">
@@ -135,14 +135,14 @@
 
     <script type="text/template" id="addproject">
       <div class='container'>
-        <form role="form" class="form-horizontal contract-form">
+        <form role="form" class="form-horizontal addproject-form">
               <h1 class='form-control' style='background-color: lightblue'>Add Project</h1>
               <div class='row'>
                   <div class='col-lg-6'>
                       <label>Title</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='title' value='<%= AddNewProject.title %>'/>
+                      <input type='text' class='form-control project-title-input' id='title'/>
                   </div>
               </div>
               <div class='row'>
@@ -150,7 +150,7 @@
                       <label>Description</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='description' value='<%= AddNewProject.description %>'/>
+                      <input type='text' class='form-control project-description-input' id='description'/>
                   </div>
               </div>
               <div class='row'>
@@ -158,7 +158,7 @@
                       <label>Start Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='start_date' value='<%= AddNewProject.start_date %>'/>
+                      <input type='date' class='form-control project-startdate-input' id='start_date'/>
                   </div>
               </div>
               <div class='row'>
@@ -166,7 +166,7 @@
                       <label>End Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='end_date' value='<%= AddNewProject.end_date %>'/>
+                      <input type='date' class='form-control project-enddate-input' id='end_date'/>
                   </div>
               </div>
               <div class='row'>
@@ -174,7 +174,7 @@
                       <label>Is Billable</label>
                   </div>
                   <div class='col-lg-6'>
-                      <select id='is_billable' class='form-control' value='<%= AddNewProject.is_billbale %>'>
+                      <select id='is_billable' class='form-control project-isbillable-input'>
                         <option>true</option>
                         <option>false</option>
                       </select>
@@ -185,7 +185,7 @@
                       <label>Is Active</label>
                   </div>
                   <div class='col-lg-6'>
-                    <select id='is_active' class='form-control' value='<%= AddNewProject.is_active %>'>
+                    <select id='is_active' class='form-control project-isactive-input'>
                       <option>true</option>
                       <option>false</option>
                     </select>
@@ -193,7 +193,7 @@
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <button type='submit' id='btnGoBack' class='form-control' style='width: 50%;'>Add Project</button>
+                  <button type='submit' id='btnGoBack' class='btn form-control btnAddProject' style='width: 100%;'>Add Project</button>
               </div>
               <div class='row' style='padding-left: 70%;'>
                   <a href='main.html' class='btn form-control'>Cencel</a>
@@ -204,14 +204,14 @@
 
     <script type="text/template" id="updateproject">
       <div class='container'>
-        <form role="form" class="form-horizontal contract-form">
+        <form role="form" class="form-horizontal updateproject-form">
               <h1 class='form-control' style='background-color: lightblue'>Add Task For Project</h1>
               <div class='row'>
                   <div class='col-lg-6'>
                       <label>Title</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='title' value='<%- title %>'/>
+                      <input type='text' class='form-control project-title-input' id='title' value='<%- title %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -219,7 +219,7 @@
                       <label>Description</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='description' value='<%- description %>'/>
+                      <input type='text' class='form-control project-description-input' id='description' value='<%- description %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -227,7 +227,7 @@
                       <label>Start Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='start_date' value='<%- startdate %>'/>
+                      <input type='date' class='form-control project-startdate-input' id='start_date' value='<%- startdate %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -235,7 +235,7 @@
                       <label>End Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='end_date'value='<%- enddate %>'/>
+                      <input type='date' class='form-control project-enddate-input' id='end_date'value='<%- enddate %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -243,7 +243,7 @@
                       <label>Is Billable</label>
                   </div>
                   <div class='col-lg-6'>
-                      <select id='is_billable'>
+                      <select id='is_billable' class='form-control project-isbillable-input'>
                         <option>true</option>
                         <option>false</option>
                       </select>
@@ -254,7 +254,7 @@
                       <label>Is Active</label>
                   </div>
                   <div class='col-lg-6'>
-                    <select id='is_active'>
+                    <select id='is_active' class="form-control project-isactive-input">
                       <option>true</option>
                       <option>false</option>
                     </select>
@@ -262,7 +262,7 @@
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <button type='submit' id='btnUpdateProject' class='form-control' style='width: 50%;'>Update Project</button>
+                  <button type='submit' id='btnUpdateProject' class='btn form-control' style='width: 100%;'>Update Project</button>
               </div>
               <div class='row' style='padding-left: 70%;'>
                   <a href='main.html' class='btn form-control'>Cencel</a>
@@ -273,14 +273,14 @@
 
     <script type="text/template" id="addtask">
       <div class='container'>
-        <form role="form" class="form-horizontal contract-form">
+        <form role="form" class="form-horizontal addtask-form">
               <h1 class='form-control' style='background-color: lightblue'>Add Task For Project</h1>
               <div class='row'>
                   <div class='col-lg-6'>
                       <label>Title</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='title'/>
+                      <input type='text' class='form-control task-title-input' id='title'/>
                   </div>
               </div>
               <div class='row'>
@@ -288,7 +288,7 @@
                       <label>Due Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='duedate'/>
+                      <input type='date' class='form-control task-duedate-input' id='duedate'/>
                   </div>
               </div>
               <div class='row'>
@@ -296,12 +296,12 @@
                       <label>Estimated Hours</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='number' class='form-control' id='estimatedhours'/>
+                      <input type='number' class='form-control task-estimatedhours-input' id='estimatedhours'/>
                   </div>
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <button type='submit' id='btnSaveTask' class='form-control' class='savenewtask' style='width: 50%;'>Save New Task</button>
+                  <button type='submit' id='btnSaveTask' class='btn form-control' class='savenewtask' style='width: 100%;'>Save New Task</button>
               </div>
               <div class='row' style='padding-left: 70%;'>
                   <a href='main.html' class='btn form-control'>Cencel</a>
@@ -312,14 +312,14 @@
 
     <script type="text/template" id="updatetask">
       <div class='container'>
-        <form role="form" class="form-horizontal contract-form">
+        <form role="form" class="form-horizontal updatetask-form">
               <h1 class='form-control' style='background-color: lightblue'>Update task</h1>
               <div class='row'>
                   <div class='col-lg-6'>
                       <label>Title</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='text' class='form-control' id='title' value='<%- title %>'/>
+                      <input type='text' class='form-control task-title-input' id='title' value='<%- title %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -327,7 +327,7 @@
                       <label>Due Date</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='date' class='form-control' id='duedate' value='<%- duedate %>'/>
+                      <input type='date' class='form-control task-duedate-input' id='duedate' value='<%- duedate %>'/>
                   </div>
               </div>
               <div class='row'>
@@ -335,12 +335,12 @@
                       <label>Estimated Hours</label>
                   </div>
                   <div class='col-lg-6'>
-                      <input type='number' class='form-control' id='estimatedhours' value='<%- estimatedhours %>' />
+                      <input type='number' class='form-control task-estimatedhours-input' id='estimatedhours' value='<%- estimatedhours %>' />
                   </div>
               </div>
               <br />
               <div class='row' style='padding-left: 70%;'>
-                  <button type='submit' id='btnUpdateTask' class='btn form-control' class='updatetask' style='width: 100%;'>Update Task</button>
+                  <button type='submit' id='btnUpdateTask' class='btn form-control btnUpdateTask' class='updatetask' style='width: 100%;'>Update Task</button>
               </div>
               <div class='row' style='padding-left: 70%;'>
                   <a href='main.html' class='btn form-control'>Cencel</a>

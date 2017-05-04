@@ -1,7 +1,7 @@
 app.TaskView = Backbone.View.extend({
   template: _.template($("#tasktblTemplate").html()),
 
-  renderOne: function(task){
+  renderTaskItem: function(task){
     console.log(task);
     var itemView = new app.TaskItemView({model: task});
     this.$(".task-table-body").append(itemView.render().$el);
@@ -13,7 +13,7 @@ app.TaskView = Backbone.View.extend({
 
     for (k in this.collection){
       console.log(k);
-      this.renderOne(this.collection[k]);
+      this.renderTaskItem(this.collection[k]);
     }
 
     return this;

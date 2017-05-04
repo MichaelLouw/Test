@@ -17,12 +17,11 @@ window.app = {
 
     router.on("route:home", function(){
       projects.fetch({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}}).then(function(collection){
-        console.log(collection);
-        // var projectsView = new app.ProjectView({
-        //   collection: projects
-        // });
-        //
-        // $("#project").html(projectView.render().$el);
+        var projectsView = new app.ProjectView({
+          collection: collection
+        });
+
+        $("#project").html(projectsView.render().$el);
       }, function(error){
         $.notify("Error loading project data", "error");
       });
@@ -46,6 +45,7 @@ window.app = {
       newProjectView.on("form:submitted", function(attr){
         attr.id = projects.isEmpty() ? 1 : (_.max(projects.pluck('id')) + 1);
         projects.add(attr);
+        attr.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}});
         router.navigate('', true);
       });
 
@@ -62,7 +62,9 @@ window.app = {
         });
 
         AddTaskToProject.on('form:submitted', function(attr){
+          console.log(attr);
           tasks.add(attr);
+          attr.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "POST", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + project.attributes.pk + "/"});
           router.navigate('', true);
         });
 
@@ -75,7 +77,8 @@ window.app = {
 
     router.on("route:DeleteProject", function(projectid){
       var project = projects.get(projectid);
-      projects.destroy(project);
+      project.destroy({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.attributes.pk + "/"});
+      projects.remove(project);
       router.navigate('', true);
     });
 
@@ -98,6 +101,7 @@ window.app = {
 
         UpdateProjectView.on("form:submitted", function(attr){
           project.set(attr);
+          project.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "PATCH", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.attributes.pk + "/"});
           router.navigate("", true);
         });
 
@@ -117,8 +121,8 @@ window.app = {
         });
 
         UpdateTaskView.on("form:submitted", function(attr){
-          console.log(attr);
           task.set(attr);
+          task.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "PATCH", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.attributes.id + "/"});
           router.navigate("", true);
         });
 
