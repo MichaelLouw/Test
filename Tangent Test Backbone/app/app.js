@@ -45,8 +45,10 @@ window.app = {
       newProjectView.on("form:submitted", function(attr){
         attr.id = projects.isEmpty() ? 1 : (_.max(projects.pluck('id')) + 1);
         projects.add(attr);
-        attr.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}});
-        router.navigate('', true);
+        var prj = new app.project(attr);
+        prj.save({}, { headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/"});
+        //router.navigate('', true);
+        window.location.replace("http://localhost:9000/main.html");
       });
 
       $("#mainContainer").html(newProjectView.render().$el);
@@ -64,8 +66,10 @@ window.app = {
         AddTaskToProject.on('form:submitted', function(attr){
           console.log(attr);
           tasks.add(attr);
-          attr.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "POST", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + project.attributes.pk + "/"});
-          router.navigate('', true);
+          var tsk = new app.task(attr);
+          tsk.save({}, { headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/"});
+          //router.navigate('showdata', true);
+          window.location.replace("http://localhost:9000/main.html");
         });
 
         $("#mainContainer").html(AddTaskToProject.render().$el);
@@ -77,17 +81,25 @@ window.app = {
 
     router.on("route:DeleteProject", function(projectid){
       var project = projects.get(projectid);
-      project.destroy({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.attributes.pk + "/"});
       projects.remove(project);
-      router.navigate('', true);
+      project.destroy({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.attributes.pk + "/"}).then(function(data){
+        window.location.replace("http://localhost:9000/main.html");
+      }, function(error){
+        console.log(error);
+      });
+      //router.navigate('', true);
     });
 
     router.on("route:DeleteTask", function(taskid){
       var task = tasks.get(taskid);
       console.log(task.attributes);
-      task.destroy({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.attributes.id + "/"});
       tasks.remove(task);
-      router.navigate("", true);
+      task.destroy({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.attributes.id + "/"}).then(function(data){
+        window.location.replace("http://localhost:9000/main.html");
+      }, function(error){
+        console.log(error);
+      });
+      //router.navigate("", true);
     });
 
     router.on("route:UpdateProject", function(projectid){
@@ -102,7 +114,8 @@ window.app = {
         UpdateProjectView.on("form:submitted", function(attr){
           project.set(attr);
           project.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "PATCH", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.attributes.pk + "/"});
-          router.navigate("", true);
+          //router.navigate("", true);
+          window.location.replace("http://localhost:9000/main.html");
         });
 
         $("#mainContainer").html(UpdateProjectView.render().$el);
@@ -123,7 +136,8 @@ window.app = {
         UpdateTaskView.on("form:submitted", function(attr){
           task.set(attr);
           task.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "PATCH", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.attributes.id + "/"});
-          router.navigate("", true);
+          //router.navigate("", true);
+          window.location.replace("http://localhost:9000/main.html");
         });
 
         $("#mainContainer").html(UpdateTaskView.render().$el);

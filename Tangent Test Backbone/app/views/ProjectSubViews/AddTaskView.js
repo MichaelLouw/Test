@@ -23,7 +23,7 @@ app.AddTask = Backbone.View.extend({
       title: $(".task-title-input").val(),
       due_date: $(".task-duedate-input").val(),
       estimated_hours: $(".task-estimatedhours-input").val(),
-      project: this.model.pk
+      project: this.model.attributes.pk
     });
   }
 
