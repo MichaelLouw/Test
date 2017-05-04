@@ -112,8 +112,15 @@ window.app = {
         });
 
         UpdateProjectView.on("form:submitted", function(attr){
+          console.log(attr);
           project.set(attr);
-          project.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "PATCH", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/projects/" + project.attributes.pk + "/"});
+          var prj = new app.project({pk: project.attributes.pk + "/"});
+          project.fetch({data: JSON.stringify(attr), contentType: "application/json", headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "PATCH", success: function(data){
+            console.log(data);
+            window.location.replace("http://localhost:9000/main.html");
+          }, error: function(error){
+            console.log(error);
+          }});
           //router.navigate("", true);
           window.location.replace("http://localhost:9000/main.html");
         });
@@ -135,7 +142,13 @@ window.app = {
 
         UpdateTaskView.on("form:submitted", function(attr){
           task.set(attr);
-          task.save({ headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, method: "PATCH", url: "http://projectservice.staging.tangentmicroservices.com:80/api/v1/tasks/" + task.attributes.id + "/"});
+          var tsk = new app.task({pk: task.attributes.id + "/"});
+          tsk.fetch({data: attr, headers: {"Authorization": "Token " + sessionStorage.getItem("Token")}, type: "PATCH"}).then(function(data){
+            console.log(data);
+            window.location.replace("http://localhost:9000/main.html");
+          }, function(error){
+            console.log(error);
+          });
           //router.navigate("", true);
           window.location.replace("http://localhost:9000/main.html");
         });

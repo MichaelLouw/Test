@@ -18,7 +18,7 @@ app.AddTask = Backbone.View.extend({
 
   onFormSubmit: function(e){
     e.preventDefault();
-    alert("submit task");
+    
     this.trigger('form:submitted', {
       title: $(".task-title-input").val(),
       due_date: $(".task-duedate-input").val(),
